@@ -30,5 +30,6 @@
 
 #include <cppunit/ui/text/TestRunner.h>
 #include "keyboard_engine_tests.hpp"
+#include "col_engine_tests.hpp"
 
 #endif //RED_ENGINE_TESTS_MAIN_HPP

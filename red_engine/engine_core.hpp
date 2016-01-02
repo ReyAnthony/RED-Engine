@@ -52,7 +52,9 @@ namespace RedEngine
 		RES_NOT_FOUND,			//7
 		EMPTY_LABEL,			//8
 		ALREADY_USED_LABEL,  	//9
-		CANNOT_RESERVE_SAMPLES //10
+		CANNOT_RESERVE_SAMPLES, //10
+		TEST_EXIT //11
+
 
 	};
 

@@ -20,26 +20,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a83a64dc-87ad-4762-b5bd-cad0cf56f295" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/game/main.cpp" afterPath="$PROJECT_DIR$/game/main.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/game/main.hpp" afterPath="$PROJECT_DIR$/game/main.hpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/game/z_components/map.cpp" afterPath="$PROJECT_DIR$/game/z_components/map.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/game/z_components/map.hpp" afterPath="$PROJECT_DIR$/game/z_components/map.hpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/game/z_components/player.cpp" afterPath="$PROJECT_DIR$/game/z_components/player.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/game/z_components/player.hpp" afterPath="$PROJECT_DIR$/game/z_components/player.hpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/game/z_components/snow.cpp" afterPath="$PROJECT_DIR$/game/z_components/snow.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/game/z_components/snow.hpp" afterPath="$PROJECT_DIR$/game/z_components/snow.hpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/game/z_scenes/overworld.cpp" afterPath="$PROJECT_DIR$/game/z_scenes/overworld.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/game/z_scenes/overworld.hpp" afterPath="$PROJECT_DIR$/game/z_scenes/overworld.hpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/red_engine/collision_engine.cpp" afterPath="$PROJECT_DIR$/red_engine/collision_engine.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/red_engine/collision_engine.hpp" afterPath="$PROJECT_DIR$/red_engine/collision_engine.hpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/red_engine/engine_core.cpp" afterPath="$PROJECT_DIR$/red_engine/engine_core.cpp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/red_engine/unit_tests/source/col_engine_tests.cpp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/red_engine/unit_tests/source/col_engine_tests.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/red_engine/engine_core.hpp" afterPath="$PROJECT_DIR$/red_engine/engine_core.hpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/red_engine/keyboard_engine.cpp" afterPath="$PROJECT_DIR$/red_engine/keyboard_engine.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/red_engine/keyboard_engine.hpp" afterPath="$PROJECT_DIR$/red_engine/keyboard_engine.hpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/red_engine/map.cpp" afterPath="$PROJECT_DIR$/red_engine/map.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/red_engine/map.hpp" afterPath="$PROJECT_DIR$/red_engine/map.hpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/red_engine/unit_tests/source/keyboard_engine_tests.cpp" afterPath="$PROJECT_DIR$/red_engine/unit_tests/source/keyboard_engine_tests.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/red_engine/unit_tests/source/keyboard_engine_tests.hpp" afterPath="$PROJECT_DIR$/red_engine/unit_tests/source/keyboard_engine_tests.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/red_engine/unit_tests/run_tests.sh" afterPath="$PROJECT_DIR$/red_engine/unit_tests/run_tests.sh" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/red_engine/unit_tests/source/tests_main.cpp" afterPath="$PROJECT_DIR$/red_engine/unit_tests/source/tests_main.cpp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/red_engine/unit_tests/source/tests_main.hpp" afterPath="$PROJECT_DIR$/red_engine/unit_tests/source/tests_main.hpp" />
     </list>
@@ -61,7 +46,40 @@
     <favorites_list name="rednoz-engine" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="col_engine_tests.cpp" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/red_engine/unit_tests/source/col_engine_tests.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.31490386">
+              <caret line="102" column="20" selection-start-line="102" selection-start-column="20" selection-end-line="102" selection-end-column="20" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="engine_core.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/red_engine/engine_core.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="2" column="42" selection-start-line="2" selection-start-column="42" selection-end-line="2" selection-end-column="42" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="tests_main.hpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/red_engine/unit_tests/source/tests_main.hpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="32" column="31" selection-start-line="32" selection-start-column="31" selection-end-line="32" selection-end-column="31" />
+              <folding>
+                <element signature="e#824#853#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -93,19 +111,15 @@
         <option value="$PROJECT_DIR$/red_engine/unit_tests/keyboard_engine_tests.cpp" />
         <option value="$PROJECT_DIR$/red_engine/unit_tests/collision_engine_tests.cpp" />
         <option value="$PROJECT_DIR$/red_engine/unit_tests/tests_main.cpp" />
-        <option value="$PROJECT_DIR$/red_engine/unit_tests/run_tests.sh" />
         <option value="$PROJECT_DIR$/red_engine/engine_core.cpp" />
         <option value="$PROJECT_DIR$/red_engine/collision_engine.hpp" />
         <option value="$PROJECT_DIR$/red_engine/collision_engine.cpp" />
-        <option value="$PROJECT_DIR$/red_engine/engine_core.hpp" />
         <option value="$PROJECT_DIR$/red_engine/keyboard_engine.cpp" />
         <option value="$PROJECT_DIR$/red_engine/keyboard_engine.hpp" />
         <option value="$PROJECT_DIR$/red_engine/map.cpp" />
         <option value="$PROJECT_DIR$/red_engine/map.hpp" />
         <option value="$PROJECT_DIR$/red_engine/unit_tests/source/keyboard_engine_tests.cpp" />
         <option value="$PROJECT_DIR$/red_engine/unit_tests/source/keyboard_engine_tests.hpp" />
-        <option value="$PROJECT_DIR$/red_engine/unit_tests/source/tests_main.cpp" />
-        <option value="$PROJECT_DIR$/red_engine/unit_tests/source/tests_main.hpp" />
         <option value="$PROJECT_DIR$/game/z_components/map.cpp" />
         <option value="$PROJECT_DIR$/game/z_components/map.hpp" />
         <option value="$PROJECT_DIR$/game/z_components/player.cpp" />
@@ -116,6 +130,12 @@
         <option value="$PROJECT_DIR$/game/z_scenes/overworld.hpp" />
         <option value="$PROJECT_DIR$/game/main.cpp" />
         <option value="$PROJECT_DIR$/game/main.hpp" />
+        <option value="$PROJECT_DIR$/red_engine/unit_tests/source/col_engine_tests.hpp" />
+        <option value="$PROJECT_DIR$/red_engine/unit_tests/source/tests_main.hpp" />
+        <option value="$PROJECT_DIR$/red_engine/unit_tests/source/tests_main.cpp" />
+        <option value="$PROJECT_DIR$/red_engine/unit_tests/run_tests.sh" />
+        <option value="$PROJECT_DIR$/red_engine/engine_core.hpp" />
+        <option value="$PROJECT_DIR$/red_engine/unit_tests/source/col_engine_tests.cpp" />
       </list>
     </option>
   </component>
@@ -197,7 +217,55 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="game" />
+              <option name="myItemId" value="red_engine" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="unit_tests" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="RED-Engine" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.CidrFilesViewHelper$MyProjectTreeStructure$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="RED-Engine" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="red_engine" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="unit_tests" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test_res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="RED-Engine" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.CidrFilesViewHelper$MyProjectTreeStructure$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="RED-Engine" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="red_engine" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="unit_tests" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="source" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -214,10 +282,6 @@
               <option name="myItemId" value="game" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
@@ -229,6 +293,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/red_engine/unit_tests/test_res" />
       <recent name="$PROJECT_DIR$/red_engine/unit_tests" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -353,9 +418,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="744" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25019857" sideWeight="0.49069768" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25019857" sideWeight="0.49069768" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3288889" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32568806" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -388,7 +453,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="11" />
+      <option name="time" value="16" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -587,56 +652,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/red_engine/unit_tests/run_tests.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.036057692">
-          <caret line="1" column="72" selection-start-line="1" selection-start-column="72" selection-end-line="1" selection-end-column="72" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/red_engine/engine_core.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.072115384">
-          <caret line="2" column="42" selection-start-line="2" selection-start-column="42" selection-end-line="2" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/red_engine/collision_engine.hpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.072115384">
-          <caret line="2" column="42" selection-start-line="2" selection-start-column="42" selection-end-line="2" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/red_engine/collision_engine.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.25240386">
-          <caret line="7" column="37" selection-start-line="7" selection-start-column="37" selection-end-line="7" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/red_engine/engine_core.hpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="17" selection-end-column="2" />
-          <folding>
-            <element signature="e#800#829#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/red_engine/keyboard_engine.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="17" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/red_engine/keyboard_engine.hpp">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.14423077">
@@ -657,40 +672,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.26992288">
           <caret line="7" column="8" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/red_engine/unit_tests/source/tests_main.hpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="8" column="14" selection-start-line="8" selection-start-column="14" selection-end-line="8" selection-end-column="14" />
-          <folding>
-            <element signature="e#824#853#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/red_engine/unit_tests/source/tests_main.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.25240386">
-          <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/red_engine/unit_tests/source/keyboard_engine_tests.hpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.036057692">
-          <caret line="1" column="27" selection-start-line="1" selection-start-column="27" selection-end-line="1" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/red_engine/unit_tests/source/keyboard_engine_tests.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="17" selection-end-column="2" />
           <folding />
         </state>
       </provider>
@@ -761,18 +742,122 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/game/main.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3966346">
-          <caret line="11" column="18" selection-start-line="11" selection-start-column="18" selection-end-line="11" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/game/main.hpp">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.25240386">
           <caret line="7" column="12" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/red_engine/unit_tests/source/keyboard_engine_tests.hpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="17" selection-end-column="2" />
+          <folding>
+            <element signature="e#858#877#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/red_engine/keyboard_engine.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.2259616">
+          <caret line="35" column="5" selection-start-line="23" selection-start-column="4" selection-end-line="35" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/red_engine/collision_engine.hpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.072115384">
+          <caret line="2" column="42" selection-start-line="2" selection-start-column="42" selection-end-line="2" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/red_engine/unit_tests/run_tests.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="1" column="78" selection-start-line="1" selection-start-column="78" selection-end-line="1" selection-end-column="78" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/red_engine/unit_tests/source/col_engine_tests.hpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="46" column="29" selection-start-line="46" selection-start-column="29" selection-end-line="46" selection-end-column="29" />
+          <folding>
+            <element signature="e#843#862#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/red_engine/collision_engine.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.60336536">
+          <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/game/main.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.2524039">
+          <caret line="61" column="4" selection-start-line="61" selection-start-column="4" selection-end-line="61" selection-end-column="82" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/red_engine/unit_tests/source/tests_main.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.74759614">
+          <caret line="40" column="17" selection-start-line="40" selection-start-column="17" selection-end-line="40" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/red_engine/unit_tests/source/keyboard_engine_tests.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="23" column="62" selection-start-line="23" selection-start-column="4" selection-end-line="23" selection-end-column="62" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/red_engine/engine_core.hpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.88688946">
+          <caret line="55" column="22" selection-start-line="55" selection-start-column="22" selection-end-line="55" selection-end-column="22" />
+          <folding>
+            <element signature="e#800#829#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/red_engine/unit_tests/source/tests_main.hpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="32" column="31" selection-start-line="32" selection-start-column="31" selection-end-line="32" selection-end-column="31" />
+          <folding>
+            <element signature="e#824#853#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/red_engine/engine_core.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="2" column="42" selection-start-line="2" selection-start-column="42" selection-end-line="2" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/red_engine/unit_tests/source/col_engine_tests.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.31490386">
+          <caret line="102" column="20" selection-start-line="102" selection-start-column="20" selection-end-line="102" selection-end-column="20" />
           <folding />
         </state>
       </provider>
