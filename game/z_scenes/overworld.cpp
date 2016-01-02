@@ -40,12 +40,16 @@ void Overworld::init()
 	addComponent(map);
 	addComponent(snow);
 
+    transition = new RedEngine::TransitionTypeA();
+	addComponent(transition);
+
 	//getManager()->getSoundEngine()->startMusic("overworld_music");
 }
 
 void Overworld::update()
 {
 	//could use it, but we won't
+    transition->start();
 	
 }
 

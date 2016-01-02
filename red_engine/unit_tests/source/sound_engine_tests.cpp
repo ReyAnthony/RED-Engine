@@ -1,5 +1,5 @@
 /*
-	tests_main.hpp is part of
+    sound_engine_tests.cpp is part of
 	RED-ENGINE - An Object-Oriented game engine based on Allegro5
 	Copyright (C) 2015 Anthony REY
 
@@ -16,21 +16,26 @@
 	You should have received a copy of the GNU General Public License
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#ifndef RED_ENGINE_TESTS_MAIN_HPP
-#define RED_ENGINE_TESTS_MAIN_HPP
 
-#include <allegro5/allegro.h>
-#include <allegro5/keyboard.h>
-#include <allegro5/allegro_primitives.h>
-#include <allegro5/allegro_font.h>
-#include <allegro5/allegro_ttf.h>
-#include <allegro5/allegro_audio.h>
-#include <allegro5/allegro_acodec.h>
-#include <allegro5/allegro_image.h>
-
-#include <cppunit/ui/text/TestRunner.h>
-#include "keyboard_engine_tests.hpp"
-#include "col_engine_tests.hpp"
 #include "sound_engine_tests.hpp"
 
-#endif //RED_ENGINE_TESTS_MAIN_HPP
+void SoundEngineTests::setUp()
+{
+    std::cout << "Running SoundEngine Tests." << std::endl;
+
+    //We need a manager to create sprites
+    game = new RedEngine::Manager(640, 480, "RedEngine Test");
+
+    //we need some resources to create the sounds
+}
+
+void SoundEngineTests::testEngine()
+{
+    //TODO
+}
+
+void SoundEngineTests::tearDown()
+{
+    game->stop(RedEngine::TEST_EXIT);
+    delete game;
+}

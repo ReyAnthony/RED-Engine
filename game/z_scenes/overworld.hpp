@@ -54,6 +54,7 @@
 
 #include "red_engine/engine_core.hpp"
 #include "red_engine/map.hpp"
+#include "red_engine/transitions.hpp"
 #include "../z_components/map.hpp"
 #include "../z_components/snow.hpp"
 
@@ -66,6 +67,9 @@ class Overworld : public RedEngine::GameScene
 		void init();
 		void update();
 		void draw();
+
+	private:
+		RedEngine::TransitionTypeA *transition;
 };
 
 #endif

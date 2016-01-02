@@ -54,8 +54,6 @@ namespace RedEngine
 		ALREADY_USED_LABEL,  	//9
 		CANNOT_RESERVE_SAMPLES, //10
 		TEST_EXIT //11
-
-
 	};
 
 	//forward declarations

@@ -38,6 +38,7 @@ int main(int argc, char** argv)
     CppUnit::TextUi::TestRunner runner;
     runner.addTest(KeyboardEngineTest::suite());
     runner.addTest(ColEngineTest::suite());
+    runner.addTest(SoundEngineTests::suite());
     runner.run();
 
     //return 1 if failed tests
