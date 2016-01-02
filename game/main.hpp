@@ -1,7 +1,7 @@
 /*
 	main.hpp is part of
 	RED-ENGINE - An Object-Oriented game engine based on Allegro5
-	Copyright (C) 2015 Anthony REY
+	Copyright (C) 2015 - 2016 Anthony REY
 
 	This program is free software: you can redistribute it and/or modify
 			it under the terms of the GNU General Public License as published by
