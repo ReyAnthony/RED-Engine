@@ -37,6 +37,7 @@ public class EditorController implements ActionListener, AWTEventListener, Mouse
 
     private EditorFrame view;
     private Point position;
+    private AssocData nullAssoc;
 
     public EditorController()
     {
@@ -143,6 +144,7 @@ public class EditorController implements ActionListener, AWTEventListener, Mouse
             {
                 //jumps it, that's normal, we'll use the mapped key for void cells
                 //but it hsould be there only once, we check for it before anyway
+                nullAssoc = new AssocData(null, ((String) s).charAt(0));
             }
             else
             {
@@ -223,10 +225,7 @@ public class EditorController implements ActionListener, AWTEventListener, Mouse
 
             view.scrollPane.getHorizontalScrollBar().setValue(posX);
             view.scrollPane.getVerticalScrollBar().setValue(posY);
-
         }
-
-
     }
 
     private void loadMap()
