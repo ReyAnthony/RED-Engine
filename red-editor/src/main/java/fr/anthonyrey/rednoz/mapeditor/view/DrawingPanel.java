@@ -1,5 +1,6 @@
 package fr.anthonyrey.rednoz.mapeditor.view;
 
+import fr.anthonyrey.rednoz.mapeditor.model.AppConsts;
 import fr.anthonyrey.rednoz.mapeditor.model.Sprite;
 
 import javax.swing.*;
@@ -69,7 +70,7 @@ public class DrawingPanel extends JPanel {
                 if(showNums)
                 {
                     g.setColor(new Color(255,0,0));
-                    g.drawString(""+i, spr.getX(), spr.getY()+32);
+                    g.drawString(""+i, spr.getX(), spr.getY()+ AppConsts.SPRITE_SIZE);
 
                 }
 
@@ -80,7 +81,7 @@ public class DrawingPanel extends JPanel {
         }
 
         g.setColor(new Color(0,0,0));
-        g.drawRect(selectorPos.x, selectorPos.y, 32, 32);
+        g.drawRect(selectorPos.x, selectorPos.y, AppConsts.SPRITE_SIZE, AppConsts.SPRITE_SIZE);
 
     }
 

@@ -1,5 +1,6 @@
 package fr.anthonyrey.rednoz.mapeditor.controller;
 
+import fr.anthonyrey.rednoz.mapeditor.model.AppConsts;
 import fr.anthonyrey.rednoz.mapeditor.model.AssocData;
 import fr.anthonyrey.rednoz.mapeditor.model.ImageCellRenderer;
 import fr.anthonyrey.rednoz.mapeditor.model.Sprite;
@@ -9,7 +10,9 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -171,7 +174,6 @@ public class EditorController implements ActionListener, AWTEventListener, Mouse
     private void setPosition()
     {
         view.cursorPos.setText("X : "+position.x+ " - Y : "+position.y);
-
     }
 
     @Override
@@ -240,6 +242,12 @@ public class EditorController implements ActionListener, AWTEventListener, Mouse
         chooser.showSaveDialog(view);
         File f;
 
+        //first we check the size of the map
+        int width = view.drawingPanel.getWidth() / AppConsts.SPRITE_SIZE;
+        int height = view.drawingPanel.getHeight() / AppConsts.SPRITE_SIZE;
+
+
+
         if((f = chooser.getSelectedFile()) != null)
         {
             for(ArrayList<Sprite> layer : view.drawingPanel.sprites)
@@ -269,46 +277,46 @@ public class EditorController implements ActionListener, AWTEventListener, Mouse
             {
                 if(e.getKeyCode() == KeyEvent.VK_RIGHT)
                 {
-                    if(position.x +32 < width)
-                        position.x += 32;
+                    if(position.x +AppConsts.SPRITE_SIZE < width)
+                        position.x += AppConsts.SPRITE_SIZE;
                 }
                 else if(e.getKeyCode() == KeyEvent.VK_LEFT)
                 {
-                    if(position.x -32 >= 0)
-                        position.x -= 32;
+                    if(position.x -AppConsts.SPRITE_SIZE >= 0)
+                        position.x -= AppConsts.SPRITE_SIZE;
                 }
                 else if(e.getKeyCode() == KeyEvent.VK_UP)
                 {
-                    if(position.y -32 >= 0)
-                        position.y -= 32;
+                    if(position.y -AppConsts.SPRITE_SIZE >= 0)
+                        position.y -= AppConsts.SPRITE_SIZE;
                 }
                 else if(e.getKeyCode() == KeyEvent.VK_DOWN)
                 {
-                    if(position.y +32 < height)
-                        position.y += 32;
+                    if(position.y +AppConsts.SPRITE_SIZE < height)
+                        position.y += AppConsts.SPRITE_SIZE;
                 }
 
             //Buggy
             int posX = view.scrollPane.getViewport().getViewPosition().x;
             int posY = view.scrollPane.getViewport().getViewPosition().y;
 
-            if(position.x >= posX + view.scrollPane.getWidth() - 32)
+            if(position.x >= posX + view.scrollPane.getWidth() - AppConsts.SPRITE_SIZE)
             {
-                view.scrollPane.getHorizontalScrollBar().setValue(posX+32);
+                view.scrollPane.getHorizontalScrollBar().setValue(posX+AppConsts.SPRITE_SIZE);
             }
             else if(position.x <=  posX)
             {
-                view.scrollPane.getHorizontalScrollBar().setValue(posX-32);
+                view.scrollPane.getHorizontalScrollBar().setValue(posX-AppConsts.SPRITE_SIZE);
 
             }
 
-            if(position.y >= posY + view.scrollPane.getHeight() - 32)
+            if(position.y >= posY + view.scrollPane.getHeight() - AppConsts.SPRITE_SIZE)
             {
-                view.scrollPane.getVerticalScrollBar().setValue(posY+32);
+                view.scrollPane.getVerticalScrollBar().setValue(posY+AppConsts.SPRITE_SIZE);
             }
             else if(position.y <=  posY)
             {
-                view.scrollPane.getVerticalScrollBar().setValue(posY-32);
+                view.scrollPane.getVerticalScrollBar().setValue(posY-AppConsts.SPRITE_SIZE);
 
             }
 

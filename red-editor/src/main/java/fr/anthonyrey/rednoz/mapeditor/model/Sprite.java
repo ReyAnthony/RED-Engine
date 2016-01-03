@@ -32,7 +32,7 @@ public class Sprite implements Serializable{
 
     public Sprite(BufferedImage image, Point position, char assoc) throws IOException {
 
-        this.image =  image.getScaledInstance(32,32,0);
+        this.image =  image.getScaledInstance(AppConsts.SPRITE_SIZE,AppConsts.SPRITE_SIZE,0);
         this.position = position;
         this.assoc = assoc;
     }
