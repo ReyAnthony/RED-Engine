@@ -1,5 +1,7 @@
 package fr.anthonyrey.rednoz.mapeditor.view;
 
+import fr.anthonyrey.rednoz.mapeditor.model.AssocData;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -32,7 +34,7 @@ public class EditorFrame extends JFrame {
     public JScrollPane scrollPane;
     public JCheckBox showLayers;
     public JComboBox<String> selectedLayer;
-    public JList<BufferedImage> components;
+    public JList<AssocData> components;
     public JButton removeAll;
     public JCheckBox showLayersNum;
     public JMenuItem newMap;

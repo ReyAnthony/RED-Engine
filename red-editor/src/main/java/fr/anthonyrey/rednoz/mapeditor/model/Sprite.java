@@ -28,13 +28,13 @@ public class Sprite implements Serializable{
 
     private Image image;
     private Point position;
-    private String type;
+    private char assoc;
 
-    public Sprite(BufferedImage image, Point position) throws IOException {
+    public Sprite(BufferedImage image, Point position, char assoc) throws IOException {
 
         this.image =  image.getScaledInstance(32,32,0);
-
         this.position = position;
+        this.assoc = assoc;
     }
 
     public Image getImage() {
@@ -67,4 +67,7 @@ public class Sprite implements Serializable{
 
     }
 
+    public char getAssoc() {
+        return assoc;
+    }
 }

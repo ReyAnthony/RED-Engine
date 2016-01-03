@@ -2,7 +2,6 @@ package fr.anthonyrey.rednoz.mapeditor.model;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 
 /*
 	ImageCellRenderer.java is part of
@@ -22,7 +21,7 @@ import java.awt.image.BufferedImage;
 	You should have received a copy of the GNU General Public License
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-public class ImageCellRenderer extends JLabel implements ListCellRenderer<BufferedImage> {
+public class ImageCellRenderer extends JLabel implements ListCellRenderer<AssocData> {
 
     public ImageCellRenderer()
     {
@@ -30,11 +29,11 @@ public class ImageCellRenderer extends JLabel implements ListCellRenderer<Buffer
     }
 
     @Override
-    public Component getListCellRendererComponent(JList<? extends BufferedImage> list, BufferedImage value, int index,
+    public Component getListCellRendererComponent(JList<? extends AssocData> list, AssocData value, int index,
                                                   boolean isSelected, boolean cellHasFocus) {
         Color background;
 
-        this.setIcon(new ImageIcon(value));
+        this.setIcon(new ImageIcon(value.getImage()));
         this.setHorizontalAlignment(JLabel.CENTER);
 
         if(!isSelected)

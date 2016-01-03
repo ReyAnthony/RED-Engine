@@ -1,5 +1,6 @@
 package fr.anthonyrey.rednoz.mapeditor.controller;
 
+import fr.anthonyrey.rednoz.mapeditor.model.AssocData;
 import fr.anthonyrey.rednoz.mapeditor.model.ImageCellRenderer;
 import fr.anthonyrey.rednoz.mapeditor.model.Sprite;
 import fr.anthonyrey.rednoz.mapeditor.view.EditorFrame;
@@ -8,9 +9,10 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Properties;
 
 /*
 	EditorController.java is part of
@@ -64,27 +66,104 @@ public class EditorController implements ActionListener, AWTEventListener, Mouse
 
         view.saveMap.addActionListener(this);
 
-        //TODO jar bug
-        DefaultListModel<BufferedImage> model =  new DefaultListModel<>();
-
         try {
-            for(File f : new File(this.getClass().getResource("/fr/anthonyrey/rednoz/sprites/").getPath()).listFiles((dir, name) -> {
-                if(name.endsWith(".png"))
-                    return true;
-                else
-                    return false;
-            })) {
-                model.addElement(ImageIO.read(f));
-            }
-        } catch (IOException e) {
+            createSideSelectionBar();
+        } catch (Exception e) {
+            new JOptionPane().showMessageDialog(view, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE );
             e.printStackTrace();
+            System.exit(0);
         }
+
+    }
+
+    private void createSideSelectionBar() throws Exception {
+        //TODO won't work inside a jar (can't create a file from a jar (need path / url)
+
+        //1) we get associated values from the properties files
+        Properties assocProp = new Properties();
+        assocProp.load(this.getClass().getResourceAsStream("/fr/anthonyrey/rednoz/assoc/assoc.properties"));
+        checkPropertiesKeys(assocProp);
+        checkPropertiesValues(assocProp);
+        DefaultListModel<AssocData> model = createModel( generateAssocData(assocProp));
 
         view.components.setCellRenderer(new ImageCellRenderer());
         view.components.setModel(model);
         view.components.setSelectedIndex(0);
+    }
 
+    private void checkPropertiesKeys(Properties assocProp) throws Exception {
 
+        for(Object s : assocProp.keySet())
+        {
+           if(((String) s).length() > 1)
+           {
+               //too lazy to create an exception, who cares it's a map editor
+               throw new Exception("Propertie file is invalid : has a 2+ chars key, program will halt");
+           }
+        }
+    }
+
+    private void checkPropertiesValues(Properties assocProp) throws Exception {
+
+        boolean hasANullValue = false;
+
+        for(Object s : assocProp.keySet())
+        {
+            String propValue = assocProp.getProperty((String) s);
+
+            //first null
+            if(propValue.equalsIgnoreCase("null") && !hasANullValue)
+            {
+                hasANullValue = true;
+                //no need to check if it is a null for the .png check
+                continue;
+            }
+            //2+
+            else if(propValue.equalsIgnoreCase("null") && hasANullValue)
+            {
+                throw new Exception("Only 1 null value is needed in the config file");
+            }
+
+            if(!propValue.endsWith(".png"))
+            {
+                //too lazy to create an exception, who cares it's a map editor
+                throw new Exception("The mapped data should be a .png file");
+            }
+        }
+    }
+
+    private List<AssocData> generateAssocData(Properties assocProp) throws IOException {
+
+        ArrayList<AssocData> assocData = new ArrayList<>();
+
+        for(Object s : assocProp.keySet())
+        {
+            String propValue = assocProp.getProperty((String) s);
+            if(propValue.equalsIgnoreCase("null"))
+            {
+                //jumps it, that's normal, we'll use the mapped key for void cells
+                //but it hsould be there only once, we check for it before anyway
+            }
+            else
+            {
+                InputStream image = this.getClass().getResourceAsStream(propValue);
+                assocData.add(new AssocData(ImageIO.read(image) , ((String) s).charAt(0)));
+            }
+
+        }
+
+        return assocData;
+    }
+
+    private DefaultListModel<AssocData> createModel(List<AssocData> list)
+    {
+        DefaultListModel<AssocData> model = new DefaultListModel<>();
+        for(AssocData element : list)
+        {
+            model.addElement(element);
+        }
+
+        return model;
     }
 
     private void setPosition()
@@ -115,8 +194,8 @@ public class EditorController implements ActionListener, AWTEventListener, Mouse
         if(e.getSource().equals(view.add))
         {
             try {
-                view.drawingPanel.addSprite(new Sprite(view.components.getSelectedValue(),
-                        (Point) position.clone()));
+                view.drawingPanel.addSprite(new Sprite(view.components.getSelectedValue().getImage(),
+                        (Point) position.clone(), view.components.getSelectedValue().getValue()));
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
@@ -157,80 +236,24 @@ public class EditorController implements ActionListener, AWTEventListener, Mouse
 
     private void saveMap()
     {
-        try {
-
-            JFileChooser chooser = new JFileChooser();
-            chooser.showSaveDialog(view);
-            File f;
-
-            if((f = chooser.getSelectedFile()) != null)
-            {
-                ObjectOutputStream oos =  new ObjectOutputStream(new FileOutputStream(f));
-                oos.writeObject(view.drawingPanel);
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
-    }
-
-    private void saveMapXml()
-    {
-        ArrayList<ArrayList<Sprite>>  base = view.drawingPanel.sprites;
-        StringBuilder xmlOut = new StringBuilder();
-
-        int layer = 0;
-        xmlOut.append("<layers>\n");
-
-        for (ArrayList<Sprite> listSpr : base)
-        {
-
-            xmlOut.append("\t<layer id="+ layer+ ">\n");
-
-            for(Sprite spr : listSpr)
-            {
-                xmlOut.append("\t\t<sprite x="+spr.getX()+" y="+spr.getY()+ "/>\n");
-            }
-
-            xmlOut.append("\t</layer>\n");
-            layer++;
-        }
-
-        xmlOut.append("</layers>");
 
         JFileChooser chooser = new JFileChooser();
         chooser.showSaveDialog(view);
+        File f;
 
-        File f = chooser.getSelectedFile();
-
-        if(f != null)
+        if((f = chooser.getSelectedFile()) != null)
         {
+            for(ArrayList<Sprite> layer : view.drawingPanel.sprites)
+            {
+                for(Sprite spr : layer)
+                {
 
-
-            try ( FileOutputStream fos = new FileOutputStream(f)) {
-
-                try (DataOutputStream dos = new DataOutputStream(fos)) {
-                    dos.writeBytes(xmlOut.toString());
                 }
-
-
-            } catch (IOException e) {
-
-                JOptionPane.showMessageDialog(view, "Error while writing the file", null, JOptionPane.ERROR_MESSAGE);
             }
-
-        }
-        else
-        {
-            JOptionPane.showMessageDialog(view, "You must select an output file", null, JOptionPane.ERROR_MESSAGE);
-
         }
 
-        System.out.println(xmlOut);
+
     }
-
 
     @Override
     public void eventDispatched(AWTEvent event) {
