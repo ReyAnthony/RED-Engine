@@ -18,6 +18,7 @@
 */
 
 #include "transition_scene.hpp"
+#include "../game_resources.hpp"
 
 TransitionScene::TransitionScene() {
 
@@ -32,7 +33,7 @@ void TransitionScene::init() {
     transition = new RedEngine::TransitionTypeB(true);
     addComponent(transition);
     transition->start();
-    this->getManager()->getSoundEngine()->playSound("trans_1");
+    this->getManager()->getSoundEngine()->playSound(game_resources::TRANS_1);
 }
 
 void TransitionScene::update() {
@@ -45,4 +46,55 @@ void TransitionScene::update() {
 
 void TransitionScene::draw() {
     //no need to draw because the componenent is managing itself
+}
+
+
+//############ Quit transition scene #########
+
+QuitTransitionScene::QuitTransitionScene() {
+
+}
+
+QuitTransitionScene::~QuitTransitionScene() {
+
+}
+
+void QuitTransitionScene::init() {
+
+    transition = new RedEngine::TransitionTypeB(true);
+    addComponent(transition);
+    transition->start();
+    this->getManager()->getSoundEngine()->playSound(game_resources::TRANS_2);
+    getManager()->setBackgroundColor(0,0,0);
+
+}
+
+void QuitTransitionScene::update() {
+
+    if(transition->isFinished())
+    {
+
+    }
+}
+
+void QuitTransitionScene::draw() {
+
+    if(transition->isFinished())
+    {
+        //this->getManager()->stop(RedEngine::StopCodes::PLAYER_EXIT);
+        //TODO remove allegro references and improve, as this is just to test...
+
+        int center_w = getManager()->getWidth() / 2;
+        int center_h = getManager()->getHeight() / 2;
+
+        al_draw_text(getManager()->getFont(game_resources::VALIANT_50), al_map_rgb(255,255,255),
+                     center_w, center_h - 50, ALLEGRO_ALIGN_CENTRE, "Farewell !");
+        al_draw_text(getManager()->getFont(game_resources::VALIANT_25), al_map_rgb(255,255,255),
+                     center_w, center_h + 25, ALLEGRO_ALIGN_CENTRE,
+                     "The scribes are writting down your gallant deeds ...");
+
+        al_flip_display();
+        al_rest(2);
+        this->getManager()->stop(RedEngine::StopCodes::PLAYER_EXIT);
+    }
 }

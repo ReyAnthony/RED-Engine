@@ -112,7 +112,7 @@ void SnowComponent::update()
 
 void SnowComponent::draw()
 {
-    ALLEGRO_TRANSFORM camera_transform;
+
     al_identity_transform(&camera_transform);
     al_translate_transform(&camera_transform, 0, 0);
     al_use_transform(&camera_transform);

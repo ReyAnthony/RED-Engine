@@ -18,6 +18,7 @@
 */
 
 #include "player.hpp"
+#include "../game_resources.hpp"
 
 //######## PLAYER COMPONENT ##########
 PlayerComponent::PlayerComponent(int x, int y) : RedEngine::GameComponent(false)
@@ -33,7 +34,7 @@ PlayerComponent::~PlayerComponent()
 
 void PlayerComponent::init()
 {
-    player = this->getManager()->createSprite("hilda", start_x, start_y, 64, 64, 3, 10);
+    player = this->getManager()->createSprite(game_resources::HILDA, start_x, start_y, 64, 64, 3, 10);
 }
 
 void PlayerComponent::update()

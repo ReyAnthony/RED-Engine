@@ -16,6 +16,8 @@
 	You should have received a copy of the GNU General Public License
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+    ################
+
  	Other copyrights :
 
 	"The isle"
@@ -23,21 +25,25 @@
  	"One of Many"
 	by Jasmine Cooper
 	www.jasminecoopermusic.net
+
+    prince_valiant.tff
+    from Dieter Steffman
+    http://www.steffmann.de/
 */
 
 #include "main.hpp"
 
 void init_map_bindings(RedEngine::Manager* manager)
 {
-	RedEngine::MapFactory::bind('0', 0, true, "null", manager);
-	RedEngine::MapFactory::bind('2', 0, true, "trees", manager);
-	RedEngine::MapFactory::bind('3', 0, false, "mountains", manager);
-	RedEngine::MapFactory::bind('4', 0, true, "castle", manager);
-	RedEngine::MapFactory::bind('5', 0, true, "village", manager);
-	RedEngine::MapFactory::bind('6', 0, false, "water", manager);
-	RedEngine::MapFactory::bind('7', 0, false, "wall", manager);
-	RedEngine::MapFactory::bind('8', 0, false, "l_wall", manager);
-	RedEngine::MapFactory::bind('9', 0, false, "r_wall", manager);
+	RedEngine::MapFactory::bind('0', 0, true, game_resources::NULL_RES, manager);
+	RedEngine::MapFactory::bind('2', 0, true, game_resources::TREES, manager);
+	RedEngine::MapFactory::bind('3', 0, false, game_resources::MOUNTAINS, manager);
+	RedEngine::MapFactory::bind('4', 0, true, game_resources::CASTLE, manager);
+	RedEngine::MapFactory::bind('5', 0, true, game_resources::VILLAGE, manager);
+	RedEngine::MapFactory::bind('6', 0, false, game_resources::WATER, manager);
+	RedEngine::MapFactory::bind('7', 0, false, game_resources::WALL, manager);
+	RedEngine::MapFactory::bind('8', 0, false, game_resources::L_WALL, manager);
+	RedEngine::MapFactory::bind('9', 0, false, game_resources::R_WALL, manager);
 
 	//This is used in order to generate a walkable map (playermap)
 	RedEngine::MapFactory::bindGenerator(new WalkableMapGenerator());
@@ -45,22 +51,25 @@ void init_map_bindings(RedEngine::Manager* manager)
 
 void init_resources(RedEngine::Manager* game)
 {
-	game->addSprite("null", "res/sprites/null.png");
-	game->addSprite("water", "res/sprites/water.png");
-	game->addSprite("trees", "res/sprites/trees.png");
-	game->addSprite("mountains", "res/sprites/mountains.png");
-	game->addSprite("castle", "res/sprites/castle.png");
-	game->addSprite("corpse", "res/sprites/corpse.png");
-	game->addSprite("wall", "res/sprites/wall.png");
-	game->addSprite("l_wall", "res/sprites/leftWall.png");
-	game->addSprite("r_wall", "res/sprites/rightWall.png");
-	game->addSprite("village", "res/sprites/village.png");
-	game->addSprite("hilda", "res/sprites/hilda.png");
+	game->addSprite(game_resources::NULL_RES, "res/sprites/null.png");
+	game->addSprite(game_resources::WATER, "res/sprites/water.png");
+	game->addSprite(game_resources::TREES, "res/sprites/trees.png");
+	game->addSprite(game_resources::MOUNTAINS, "res/sprites/mountains.png");
+	game->addSprite(game_resources::CASTLE, "res/sprites/castle.png");
+	game->addSprite(game_resources::CORPSE, "res/sprites/corpse.png");
+	game->addSprite(game_resources::WALL, "res/sprites/wall.png");
+	game->addSprite(game_resources::L_WALL, "res/sprites/leftWall.png");
+	game->addSprite(game_resources::R_WALL, "res/sprites/rightWall.png");
+	game->addSprite(game_resources::VILLAGE, "res/sprites/village.png");
+	game->addSprite(game_resources::HILDA, "res/sprites/hilda.png");
 
-	game->addFont("arial_15", "res/fonts/Arial.ttf", 15);
+	game->addFont(game_resources::ARIAL_15, "res/fonts/Arial.ttf", 15);
+    game->addFont(game_resources::VALIANT_25, "res/fonts/prince_valiant.ttf", 25);
+    game->addFont(game_resources::VALIANT_50, "res/fonts/prince_valiant.ttf", 50);
 
-	game->addSound("overworld_music", "res/music/CuriousWanderer.ogg");
-	game->addSound("trans_1", "res/sounds/trans_1.wav");
+	game->addSound(game_resources::OVERWORLD_MUSIC, "res/music/CuriousWanderer.ogg");
+	game->addSound(game_resources::TRANS_1, "res/sounds/trans_1.wav");
+    game->addSound(game_resources::TRANS_2, "res/sounds/trans_2.wav");
 }
 
 int main(int argc, char** argv)

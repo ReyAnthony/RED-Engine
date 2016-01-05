@@ -23,6 +23,7 @@
 #include "z_scenes/overworld.hpp"
 #include "z_scenes/transition_scene.hpp"
 #include "red_engine/map.hpp"
+#include "game_resources.hpp"
 #include <list>
 
 void init_map_bindings(RedEngine::Manager* manager);

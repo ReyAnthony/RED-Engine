@@ -18,6 +18,8 @@
 */
 
 #include "overworld.hpp"
+#include "../game_resources.hpp"
+#include "transition_scene.hpp"
 
 Overworld::Overworld()
 {
@@ -40,11 +42,15 @@ void Overworld::init()
 	addComponent(map);
 	addComponent(snow);
 
-	getManager()->getSoundEngine()->startMusic("overworld_music");
+	getManager()->getSoundEngine()->startMusic(game_resources::OVERWORLD_MUSIC);
 }
 
 void Overworld::update()
 {
+	if(this->getManager()->getKeyBoardEngine()->isKeyPressed(ALLEGRO_KEY_ESCAPE))
+	{
+		this->getManager()->pushScene(new QuitTransitionScene());
+	}
 }
 
 void Overworld::draw()

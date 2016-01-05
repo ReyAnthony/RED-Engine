@@ -142,10 +142,12 @@ namespace RedEngine
 			else
 			{
 				keyboard_engine.update(&ev);
+				/*
 				if (keyboard_engine.isKeyPressed(ALLEGRO_KEY_ESCAPE))
 				{
 					stop(PLAYER_EXIT);
 				}
+				 */
 			}
 
 			//drawing

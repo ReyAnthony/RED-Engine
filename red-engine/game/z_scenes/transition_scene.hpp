@@ -38,5 +38,19 @@ class TransitionScene : public RedEngine::GameScene  {
         RedEngine::TransitionTypeA *transition;
 };
 
+class QuitTransitionScene : public RedEngine::GameScene  {
+
+public:
+    QuitTransitionScene();
+    ~QuitTransitionScene();
+    //called when pushing scene
+    void init();
+    void update();
+    void draw();
+
+private:
+    RedEngine::TransitionTypeA *transition;
+};
+
 
 #endif //RED_ENGINE_TRANSITION_SCENE_HPP
