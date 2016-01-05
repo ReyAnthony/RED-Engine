@@ -40,7 +40,7 @@ void Overworld::init()
 	addComponent(map);
 	addComponent(snow);
 
-	//getManager()->getSoundEngine()->startMusic("overworld_music");
+	getManager()->getSoundEngine()->startMusic("overworld_music");
 }
 
 void Overworld::update()

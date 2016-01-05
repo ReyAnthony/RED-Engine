@@ -15,6 +15,14 @@
 
 	You should have received a copy of the GNU General Public License
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+ 	Other copyrights :
+
+	"The isle"
+ 	"Curious Wanderer"
+ 	"One of Many"
+	by Jasmine Cooper
+	www.jasminecoopermusic.net
 */
 
 #include "main.hpp"
@@ -48,8 +56,11 @@ void init_resources(RedEngine::Manager* game)
 	game->addSprite("r_wall", "res/sprites/rightWall.png");
 	game->addSprite("village", "res/sprites/village.png");
 	game->addSprite("hilda", "res/sprites/hilda.png");
+
 	game->addFont("arial_15", "res/fonts/Arial.ttf", 15);
-	//game->addSound("overworld_music", "res/music/1.ogg");
+
+	game->addSound("overworld_music", "res/music/CuriousWanderer.ogg");
+	game->addSound("trans_1", "res/sounds/trans_1.wav");
 }
 
 int main(int argc, char** argv)

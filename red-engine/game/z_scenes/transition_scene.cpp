@@ -32,6 +32,7 @@ void TransitionScene::init() {
     transition = new RedEngine::TransitionTypeB(true);
     addComponent(transition);
     transition->start();
+    this->getManager()->getSoundEngine()->playSound("trans_1");
 }
 
 void TransitionScene::update() {
