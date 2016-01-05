@@ -49,7 +49,7 @@ namespace RedEngine {
     void TransitionTypeA::update()
     {
         if(started) {
-            y+= 10;
+            y+= speed;
 
             if (y >= this->getManager()->getHeight()) {
                 done = true;
@@ -92,7 +92,7 @@ namespace RedEngine {
     void TransitionTypeB::update()
     {
         if(started) {
-            y-= 25;
+            y-= speed;
 
             if (y <= 0) {
                 done = true;

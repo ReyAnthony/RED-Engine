@@ -39,6 +39,7 @@ namespace RedEngine
             bool done = false;
             bool started = false;
             bool showBackScene = false;
+            int speed = 25;
 
             void init();
             void update();
