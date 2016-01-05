@@ -2,7 +2,7 @@
 C++ Game Engine based on Allegro5 and java map editor
 
 <b> NOTE : All source code is licenced under GPLv3.
-HOWEVER, any graphical resources, sound, music made by myself and pushed unto this repository is under CC BY-NC-ND. </b>
+HOWEVER, any graphical resources, sound, music made by myself (they are unless stated otherwize right after) and pushed unto this repository is under CC BY-NC-ND. </b>
 
 Other copyrights :
 <b>
@@ -16,6 +16,13 @@ Other copyrights :
 by Jasmine Cooper
 <br>
 www.jasminecoopermusic.net
+<br><br>
+prince_valiant.tff
+<br>
+from Dieter Steffman
+<br><
+http://www.steffmann.de/
+<br>
 </b>
 
 THe engine folders contains the engine and the .hpp files to be used by a game using this engine. 
