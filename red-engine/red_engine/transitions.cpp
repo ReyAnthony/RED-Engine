@@ -92,7 +92,7 @@ namespace RedEngine {
     void TransitionTypeB::update()
     {
         if(started) {
-            y-= 10;
+            y-= 25;
 
             if (y <= 0) {
                 done = true;
