@@ -29,21 +29,23 @@
     prince_valiant.tff
     from Dieter Steffman
     http://www.steffmann.de/
+
+    All tiles but hilda.png are from David E. Gervais
+    and are released under CC-BY 3.0
+
+    hilda.png is from Anthony Rey and is licenced
+    under CC BY-NC-ND
 */
 
 #include "main.hpp"
 
 void init_map_bindings(RedEngine::Manager* manager)
 {
-	RedEngine::MapFactory::bind('0', 0, true, game_resources::NULL_RES, manager);
+	RedEngine::MapFactory::bind('0', 0, true, game_resources::SNOW, manager);
 	RedEngine::MapFactory::bind('2', 0, true, game_resources::TREES, manager);
 	RedEngine::MapFactory::bind('3', 0, false, game_resources::MOUNTAINS, manager);
-	RedEngine::MapFactory::bind('4', 0, true, game_resources::CASTLE, manager);
-	RedEngine::MapFactory::bind('5', 0, true, game_resources::VILLAGE, manager);
 	RedEngine::MapFactory::bind('6', 0, false, game_resources::WATER, manager);
 	RedEngine::MapFactory::bind('7', 0, false, game_resources::WALL, manager);
-	RedEngine::MapFactory::bind('8', 0, false, game_resources::L_WALL, manager);
-	RedEngine::MapFactory::bind('9', 0, false, game_resources::R_WALL, manager);
 
 	//This is used in order to generate a walkable map (playermap)
 	RedEngine::MapFactory::bindGenerator(new WalkableMapGenerator());
@@ -51,16 +53,11 @@ void init_map_bindings(RedEngine::Manager* manager)
 
 void init_resources(RedEngine::Manager* game)
 {
-	game->addSprite(game_resources::NULL_RES, "res/sprites/null.png");
+	game->addSprite(game_resources::SNOW, "res/sprites/snow.png");
 	game->addSprite(game_resources::WATER, "res/sprites/water.png");
-	game->addSprite(game_resources::TREES, "res/sprites/trees.png");
+	game->addSprite(game_resources::TREES, "res/sprites/tree.png");
 	game->addSprite(game_resources::MOUNTAINS, "res/sprites/mountains.png");
-	game->addSprite(game_resources::CASTLE, "res/sprites/castle.png");
-	game->addSprite(game_resources::CORPSE, "res/sprites/corpse.png");
 	game->addSprite(game_resources::WALL, "res/sprites/wall.png");
-	game->addSprite(game_resources::L_WALL, "res/sprites/leftWall.png");
-	game->addSprite(game_resources::R_WALL, "res/sprites/rightWall.png");
-	game->addSprite(game_resources::VILLAGE, "res/sprites/village.png");
 	game->addSprite(game_resources::HILDA, "res/sprites/hilda.png");
 
 	game->addFont(game_resources::ARIAL_15, "res/fonts/Arial.ttf", 15);

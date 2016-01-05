@@ -64,7 +64,7 @@ void SnowFlake::setSize(int size)
 
 void SnowFlake::draw()
 {
-    al_draw_filled_circle(x, y, size, al_map_rgb(255,255,255));
+    al_draw_filled_circle(x, y, size, al_map_rgb(240,240,240));
 }
 
 //######### SNOW COMPONENT #########

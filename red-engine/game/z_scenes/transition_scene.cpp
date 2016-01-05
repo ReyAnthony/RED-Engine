@@ -84,6 +84,11 @@ void QuitTransitionScene::draw() {
         //this->getManager()->stop(RedEngine::StopCodes::PLAYER_EXIT);
         //TODO remove allegro references and improve, as this is just to test...
 
+        ALLEGRO_TRANSFORM camera_transform;
+        al_identity_transform(&camera_transform);
+        al_translate_transform(&camera_transform, 0, 0);
+        al_use_transform(&camera_transform);
+
         int center_w = getManager()->getWidth() / 2;
         int center_h = getManager()->getHeight() / 2;
 

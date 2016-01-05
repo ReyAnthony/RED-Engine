@@ -25,17 +25,12 @@
 namespace game_resources
 {
     //SPRITES
-    static std::string NULL_RES = "null";
+    static std::string SNOW = "null";
     static std::string TREES = "trees";
     static std::string MOUNTAINS = "mountains";
-    static std::string CASTLE = "castle";
-    static std::string VILLAGE = "village";
     static std::string WATER = "water";
     static std::string WALL = "wall";
-    static std::string L_WALL = "l_wall";
-    static std::string R_WALL = "r_wall";
     static std::string HILDA = "hilda";
-    static std::string CORPSE = "corpse";
 
     //FONTS
     static std::string ARIAL_15 = "arial_15";
