@@ -166,13 +166,44 @@ namespace RedEngine
 
 	void Manager::update(ALLEGRO_EVENT* ev)
 	{
+
+		if(updateBackScene)
+		{
+			//TODO HACK => That's ugly. A vector would be better suited i think.
+			GameScene* current = game_scenes.top();
+			game_scenes.pop();
+
+			if(game_scenes.top() != nullptr)
+			{
+				game_scenes.top()->updateComponents();
+				game_scenes.top()->update();
+			}
+
+			game_scenes.push(current);
+		}
+
 		game_scenes.top()->updateComponents();
 		game_scenes.top()->update();
 	}
 
 	void Manager::draw()
-	{	
-		
+	{
+		//back is drawn BEFORE
+		if(drawBackScene)
+		{
+			//TODO HACK => That's ugly. A vector would be better suited i think.
+			GameScene* current = game_scenes.top();
+			game_scenes.pop();
+
+			if(game_scenes.top() != nullptr) {
+				game_scenes.top()->drawComponentsBack();
+				game_scenes.top()->draw();
+				game_scenes.top()->drawComponentsFront();
+			}
+
+			game_scenes.push(current);
+		}
+
 		game_scenes.top()->drawComponentsBack();
 		game_scenes.top()->draw();
 		game_scenes.top()->drawComponentsFront();
@@ -289,6 +320,12 @@ namespace RedEngine
 	int Manager::getHeight()
 	{
 		return height;
+	}
+
+	void Manager::shouldDrawBackScene(bool draw, bool update)
+	{
+		this->drawBackScene = draw;
+		this->updateBackScene = update;
 	}
 
 	//############## GameScene class ############## 

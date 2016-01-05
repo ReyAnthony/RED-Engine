@@ -108,6 +108,9 @@ namespace RedEngine
 			SoundEngine* getSoundEngine();
 			KeyboardEngine* getKeyBoardEngine();
 
+			//wow what a sucky name !
+			void shouldDrawBackScene(bool draw, bool update);
+
 		private:
 			//methods
 			//called by the constructor
@@ -136,6 +139,8 @@ namespace RedEngine
 			bool running;
 			bool redraw;
 			const char* title;
+			bool drawBackScene = false;
+			bool updateBackScene = false;
 
 			//allegro
 			ALLEGRO_DISPLAY* display;

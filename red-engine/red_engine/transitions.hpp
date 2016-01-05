@@ -27,20 +27,33 @@ namespace RedEngine
     class TransitionTypeA : public GameComponent
     {
         public:
-            TransitionTypeA();
+            TransitionTypeA(bool showBackScene);
             ~TransitionTypeA();
             void start();
+            bool isFinished();
 
-    private:
+    protected:
 
             int x;
             int y;
-            bool done;
-            bool started;
+            bool done = false;
+            bool started = false;
+            bool showBackScene = false;
 
             void init();
             void update();
             void draw();
+    };
+
+    class TransitionTypeB : public TransitionTypeA
+    {
+    public:
+        using TransitionTypeA::TransitionTypeA;
+
+    private:
+        void init();
+        void update();
+        void draw();
     };
 }
 #endif //RED_ENGINE_TRANSITIONS_HPP

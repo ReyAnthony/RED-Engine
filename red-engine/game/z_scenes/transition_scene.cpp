@@ -1,5 +1,5 @@
 /*
-	main.hpp is part of
+	transition_scene.cpp is part of
 	RED-ENGINE - An Object-Oriented game engine based on Allegro5
 	Copyright (C) 2015 - 2016 Anthony REY
 
@@ -17,15 +17,31 @@
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef MAIN_HPP
-#define MAIN_HPP
+#include "transition_scene.hpp"
 
-#include "z_scenes/overworld.hpp"
-#include "z_scenes/transition_scene.hpp"
-#include "red_engine/map.hpp"
-#include <list>
+TransitionScene::TransitionScene() {
 
-void init_map_bindings(RedEngine::Manager* manager);
-void init_resources(RedEngine::Manager* game);
+}
 
-#endif //MAIN_HPP
+TransitionScene::~TransitionScene() {
+
+}
+
+void TransitionScene::init() {
+
+    transition = new RedEngine::TransitionTypeB(true);
+    addComponent(transition);
+    transition->start();
+}
+
+void TransitionScene::update() {
+
+    if(transition->isFinished())
+    {
+        this->getManager()->popScene();
+    }
+}
+
+void TransitionScene::draw() {
+    //no need to draw because the componenent is managing itself
+}

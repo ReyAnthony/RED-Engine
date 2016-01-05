@@ -22,9 +22,9 @@
 namespace RedEngine {
 
     //a transition is never on the back
-    TransitionTypeA::TransitionTypeA() : GameComponent(false)
+    TransitionTypeA::TransitionTypeA(bool showBackScene) : GameComponent(false)
     {
-
+        this->showBackScene = showBackScene;
     }
 
     TransitionTypeA::~TransitionTypeA()
@@ -37,6 +37,8 @@ namespace RedEngine {
         x = 0;
         y = 0;
         done = false;
+
+        this->getManager()->shouldDrawBackScene(showBackScene, false);
     }
 
     void TransitionTypeA::start()
@@ -51,6 +53,7 @@ namespace RedEngine {
 
             if (y >= this->getManager()->getHeight()) {
                 done = true;
+                this->getManager()->shouldDrawBackScene(false, false);
             }
         }
     }
@@ -66,6 +69,43 @@ namespace RedEngine {
                 //draw a line
                 al_draw_line(0, cur_y, getManager()->getWidth(), cur_y, al_map_rgb(0,0,0), 1);
              }
+        }
+    }
+
+    bool TransitionTypeA::isFinished()
+    {
+        return this->done;
+    }
+
+
+    //########## TRANSITION B #########
+
+    void TransitionTypeB::init()
+    {
+        x = this->getManager()->getWidth();
+        y = this->getManager()->getHeight();
+        done = false;
+
+        this->getManager()->shouldDrawBackScene(showBackScene, false);
+    }
+
+    void TransitionTypeB::update()
+    {
+        if(started) {
+            y-= 10;
+
+            if (y <= 0) {
+                done = true;
+                this->getManager()->shouldDrawBackScene(false, false);
+            }
+        }
+    }
+
+    void TransitionTypeB::draw()
+    {
+        if(!done && started)
+        {
+            al_draw_filled_rectangle(0, 0, getManager()->getWidth(), y, al_map_rgb(0,0,0));
         }
     }
 

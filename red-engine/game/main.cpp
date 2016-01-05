@@ -66,6 +66,7 @@ int main(int argc, char** argv)
 	init_map_bindings(game);
 
 	game->pushScene(new Overworld());
+	game->pushScene(new TransitionScene());
 	game->start();
 
 	// CLEANING SECTION

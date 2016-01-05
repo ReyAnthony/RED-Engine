@@ -20,6 +20,7 @@
 #ifndef GAMESCENES_H
 #define GAMESCENES_H
 
+//TODO replace by a map loader
 #define SOUTH_ISLAND_OVERWORLD_DATA "\
 333333333333333332233333333333333333333333333332223333\n\
 333333333333333332233333333333333333333333333332223333\n\
@@ -68,8 +69,6 @@ class Overworld : public RedEngine::GameScene
 		void update();
 		void draw();
 
-	private:
-		RedEngine::TransitionTypeA *transition;
 };
 
 #endif

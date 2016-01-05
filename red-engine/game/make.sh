@@ -3,6 +3,7 @@
 g++ -std=gnu++1y -o RED.out -Wall \
 main.cpp \
 z_scenes/overworld.cpp \
+z_scenes/transition_scene.cpp \
 z_components/map.cpp \
 z_components/player.cpp \
 z_components/snow.cpp \
