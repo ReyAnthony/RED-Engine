@@ -56,6 +56,7 @@ void PlayerMap::update() {
 
     RedEngine::Map::update();
 
+    //last position of the player
     int last_x = playerComponent->getSprite()->getPosX();
     int last_y = playerComponent->getSprite()->getPosY();
 

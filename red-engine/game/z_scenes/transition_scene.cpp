@@ -61,7 +61,7 @@ QuitTransitionScene::~QuitTransitionScene() {
 
 void QuitTransitionScene::init() {
 
-    transition = new RedEngine::TransitionTypeB(true);
+    transition = new RedEngine::TransitionTypeA(true);
     addComponent(transition);
     transition->start();
     this->getManager()->getSoundEngine()->playSound(game_resources::TRANS_2);
