@@ -1,6 +1,13 @@
 # RED-Engine
 C++ Game Engine based on Allegro5 and java map editor
 
+I'm looking for people to : 
+- Create unit tests and do tests in general (and report bugs in the tracker)
+- Ehance the graphics 
+- Tidy up the C++ code 
+- Write an engine to manage translated strings (we could use a .hpp file tho and #if's)
+- Test the game on other OSes and different configurations 
+
 <b> NOTE : All source code is licenced under GPLv3.
 All tiles but hilda.png are from David E. Gervais
 and are released under CC-BY 3.0.
