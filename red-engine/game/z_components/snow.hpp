@@ -32,9 +32,9 @@ class SnowFlake
         int getY();
         int getSize();
 
-        int setX(int x);
-        int setY(int y);
-        int setSize(int size);
+        void setX(int x);
+        void setY(int y);
+        void setSize(int size);
 
         void draw();
 

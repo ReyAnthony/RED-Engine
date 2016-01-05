@@ -10,7 +10,7 @@ set(ENGINE_SRC
         red_engine/keyboard_engine.cpp
         red_engine/map.cpp
         red_engine/collision_engine.cpp
-        red_engine/transitions.cpp
+        red_engine/EyeCandy/transitions.cpp
         )
 
 ADD_LIBRARY(red_engine_lib STATIC

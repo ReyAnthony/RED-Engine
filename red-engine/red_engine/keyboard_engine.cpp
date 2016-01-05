@@ -30,6 +30,7 @@ namespace RedEngine
 	{
 	}
 
+	//TODO wrapper for allegro keycodes
 	bool KeyboardEngine::isKeyPressed(int key)
 	{
 		return key_map[key];

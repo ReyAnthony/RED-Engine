@@ -47,17 +47,17 @@ int SnowFlake::getSize()
     return size;
 }
 
-int SnowFlake::setX(int x)
+void SnowFlake::setX(int x)
 {
     this-> x = x;
 }
 
-int SnowFlake::setY(int y)
+void SnowFlake::setY(int y)
 {
     this->y = y;
 }
 
-int SnowFlake::setSize(int size)
+void SnowFlake::setSize(int size)
 {
     this->size = size;
 }
