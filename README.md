@@ -4,6 +4,15 @@ C++ Game Engine based on Allegro5 and java map editor
 <b> NOTE : All source code is licenced under GPLv3.
 HOWEVER, any graphical resources, sound, music made by myself and pushed unto this repository is under CC BY-NC-ND. </b>
 
+Other copyrights :
+<b>
+"The isle"
+"Curious Wanderer"
+"One of Many"
+by Jasmine Cooper
+www.jasminecoopermusic.net
+</b>
+
 THe engine folders contains the engine and the .hpp files to be used by a game using this engine. 
 Please build using the bash files (make.sh and make_lib.sh), the CMake file don't work and is just here to contempt CLion.
 I need to make a real makefile, but I'm not good at it, any help is welcome. 
