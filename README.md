@@ -4,7 +4,7 @@ C++ Game Engine based on Allegro5 and java map editor
 <b> NOTE : All source code is licenced under GPLv3.
 HOWEVER, any graphical resources, sound, music made by myself and pushed unto this repository is under CC BY-NC-ND. </b>
 
-Other copyrights :s
+Other copyrights :
 <b>
 <br>
 "The isle"
