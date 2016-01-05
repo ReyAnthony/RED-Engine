@@ -5,11 +5,17 @@ C++ Game Engine based on Allegro5 and java map editor
 HOWEVER, any graphical resources, sound, music made by myself and pushed unto this repository is under CC BY-NC-ND. </b>
 
 Other copyrights :
+
 <b>
+<br>
 "The isle"
+<br>
 "Curious Wanderer"
+<br>
 "One of Many"
+<br>
 by Jasmine Cooper
+<br>
 www.jasminecoopermusic.net
 </b>
 
