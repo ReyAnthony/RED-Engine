@@ -2,7 +2,10 @@
 C++ Game Engine based on Allegro5 and java map editor
 
 <b> NOTE : All source code is licenced under GPLv3.
-HOWEVER, any graphical resources, sound, music made by myself (they are unless stated otherwize right after) and pushed unto this repository is under CC BY-NC-ND. </b>
+All tiles but hilda.png are from David E. Gervais
+and are released under CC-BY 3.0.
+Hilda.png is from me and is licenced
+under CC BY-NC-ND. </b>
 
 Other copyrights :
 <b>
