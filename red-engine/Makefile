@@ -39,14 +39,13 @@ $(OUTPUT) : red_engine.a
 #TODO tests
 
 # ENGINE
-red_engine.a: engine_core.o keyboard_engine.o map.o collision_engine.o transitions.o gui_component.o copy_hpp
+red_engine.a: engine_core.o keyboard_engine.o map.o collision_engine.o transitions.o copy_hpp
 	ar rvs $(LIB_PATH)lib/red_engine.a \
 	engine_core.o \
 	keyboard_engine.o \
 	map.o \
 	collision_engine.o \
-	transitions.o \
-	gui_component.o
+	transitions.o 
 	ranlib $(LIB_PATH)lib/red_engine.a
 
 copy_hpp:
@@ -56,7 +55,6 @@ copy_hpp:
 	cp $(engine)map.hpp $(LIB_PATH)include/red_engine/map.hpp
 	cp $(engine)transitions.hpp $(LIB_PATH)include/red_engine/transitions.hpp
 	cp $(engine)collision_engine.hpp $(LIB_PATH)include/red_engine/collision_engine.hpp
-	cp $(engine)gui_component.hpp $(LIB_PATH)include/red_engine/gui_component.hpp
 
 #must use implicit rules to reduce
 engine_core.o:$(engine)engine_core.cpp
@@ -78,10 +76,6 @@ collision_engine.o:$(engine)collision_engine.cpp
 transitions.o:$(engine)transitions.cpp
 	$(CC) $(CCFLAGS) -c \
 	$(engine)transitions.cpp
-
-gui_component.o:$(engine)gui_component.cpp
-	$(CC) $(CCFLAGS) -c \
-	$(engine)gui_component.cpp
 
 #CLEAN
 clean:clean-engine
