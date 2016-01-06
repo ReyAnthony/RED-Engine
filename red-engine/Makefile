@@ -10,7 +10,7 @@
     #UNCOMMENT THE FOR WIN VALUES AND COMMENT THE OTHERS
 
 CC=g++
-CCFLAGS=-std=gnu++1y -Wall
+CCFLAGS=-std=gnu++1y -Wall -O3
 #LIB_PATH=c:/mingw/  #FOR WIN
 LIB_PATH=/usr/local/
 #ALLEGRO=$(LIB_PATH)lib/liballegro-5.0.10-monolith-mt.a #FOR WIN

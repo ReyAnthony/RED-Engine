@@ -4,6 +4,7 @@ C++ Game Engine based on Allegro5 and java map editor.
 Currently I tested and got it to work on : 
 - OSX
 - Trisquel GNU/Linux (Debian / Ubuntu based)
+- Windows 7 (via mingw)
 
 I'm looking for people to : 
 - Create unit tests and do tests in general (and report bugs in the tracker)
@@ -40,10 +41,6 @@ http://www.steffmann.de/
 </b>
 
 THe engine folders contains the engine and the .hpp files to be used by a game using this engine. 
-Please build using the bash files (make.sh and make_lib.sh), the CMake file don't work and is just here to contempt CLion.
-I need to make a real makefile, but I'm not good at it, any help is welcome. 
-
-Tested compiling and working on OSX 10.10.14. 
 
 Current state (Things I will likely do in short time)
 

@@ -49,6 +49,7 @@ void Overworld::update()
 {
 	if(this->getManager()->getKeyBoardEngine()->isKeyPressed(ALLEGRO_KEY_ESCAPE))
 	{
+        this->getManager()->getSoundEngine()->stopMusic();
 		this->getManager()->pushScene(new QuitTransitionScene());
 	}
 }
