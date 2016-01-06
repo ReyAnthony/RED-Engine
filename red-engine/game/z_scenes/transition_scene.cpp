@@ -81,7 +81,6 @@ void QuitTransitionScene::draw() {
 
     if(transition->isFinished())
     {
-        //this->getManager()->stop(RedEngine::StopCodes::PLAYER_EXIT);
         //TODO remove allegro references and improve, as this is just to test...
 
         ALLEGRO_TRANSFORM camera_transform;
@@ -98,8 +97,9 @@ void QuitTransitionScene::draw() {
                      center_w, center_h + 25, ALLEGRO_ALIGN_CENTRE,
                      "The scribes are writting down your gallant deeds ...");
 
-        al_flip_display();
-        al_rest(2);
-        this->getManager()->stop(RedEngine::StopCodes::PLAYER_EXIT);
+        if(counter >= 120)
+            this->getManager()->stop(RedEngine::StopCodes::PLAYER_EXIT);
+
+        counter++;
     }
 }

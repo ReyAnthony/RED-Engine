@@ -113,7 +113,7 @@ namespace RedEngine
 
 		if(isFullscreen)
 		{
-			//upon quitting there is an exception on OSX
+			//TODO upon quitting there is an exception on OSX
 			al_set_new_display_flags(ALLEGRO_FULLSCREEN_WINDOW);
 		}
 
@@ -122,7 +122,7 @@ namespace RedEngine
 		if(!display)
 			stop(DISPLAY_NULL);
 
-		//not working on osx ...
+		//TODO not working on osx ...
 		al_set_window_title(display, title);
 
 		timer = al_create_timer(1.0 / FPS);

@@ -48,6 +48,8 @@ public:
     void update();
     void draw();
 
+    int counter = 0;
+
 private:
     RedEngine::TransitionTypeA *transition;
 };
