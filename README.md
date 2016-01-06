@@ -1,5 +1,9 @@
 # RED-Engine
-C++ Game Engine based on Allegro5 and java map editor
+C++ Game Engine based on Allegro5 and java map editor.
+
+Currently I tested and got it to work on : 
+- OSX
+- Trisquel GNU/Linux (Debian / Ubuntu based)
 
 I'm looking for people to : 
 - Create unit tests and do tests in general (and report bugs in the tracker)
@@ -30,7 +34,7 @@ www.jasminecoopermusic.net
 prince_valiant.tff
 <br>
 from Dieter Steffman
-<br><
+<br>
 http://www.steffmann.de/
 <br>
 </b>
