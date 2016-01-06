@@ -23,16 +23,25 @@ namespace RedEngine
 {
 
 	//##############  Manager class ############## 
-	Manager::Manager(int width, int height, const char* title)
+	Manager::Manager(int virtual_width, int virtual_height, int real_width, int real_height, const char* title,
+					 bool isFullscreen)
 	{
-		if(width < 640)
-			width = 640;
+		if(virtual_width < 640)
+			virtual_width = 640;
+		if(virtual_height < 480)
+			virtual_height = 480;
 
-		if(height < 480)
-			height = 480;
+		this->virtual_width = virtual_width;
+		this->virtual_height = virtual_height;
 
-		this->width = width;
-		this->height = height;
+		if(real_height < virtual_height)
+			this->real_height = virtual_height;
+		if(real_width < virtual_width)
+			this->real_width = virtual_width;
+
+		this->real_width = real_width;
+		this->real_height = real_height;
+
 		running = true;
 
 		//Allegro
@@ -40,6 +49,7 @@ namespace RedEngine
 		event_queue = nullptr;
 		timer = nullptr;
 		redraw = true;
+		this->isFullscreen = isFullscreen;
 
 		this->title = title;
 
@@ -101,10 +111,13 @@ namespace RedEngine
 			exit(CANNOT_RESERVE_SAMPLES);
 		}
 
-		//TODO add params
-		//al_set_new_display_flags(ALLEGRO_FULLSCREEN_WINDOW);
+		if(isFullscreen)
+		{
+			//upon quitting there is an exception on OSX
+			al_set_new_display_flags(ALLEGRO_FULLSCREEN_WINDOW);
+		}
 
-		display = al_create_display(width, height);
+		display = al_create_display(real_width, real_height);
 
 		if(!display)
 			stop(DISPLAY_NULL);
@@ -190,6 +203,10 @@ namespace RedEngine
 
 	void Manager::draw()
 	{
+		//drawing on a bmp
+		ALLEGRO_BITMAP* bmp = al_create_bitmap(virtual_width, virtual_height);
+		al_set_target_bitmap(bmp);
+
 		//back is drawn BEFORE
 		if(drawBackScene)
 		{
@@ -209,6 +226,18 @@ namespace RedEngine
 		game_scenes.top()->drawComponentsBack();
 		game_scenes.top()->draw();
 		game_scenes.top()->drawComponentsFront();
+
+		//resizing and drawing
+		//TODO this seems pretty slow ?
+		//TODO harcoded for 4/3 to 16/9
+		//aspect ratio calculations
+		int width = (real_width / 4 ) * 3;
+
+		al_set_target_bitmap(al_get_backbuffer(this->display));
+		al_draw_scaled_bitmap(bmp, 0, 0,
+							  virtual_width,virtual_height,
+							  (width / 3) / 2, 0 ,
+							  width, real_height, 0);
 
 		al_flip_display();
 		al_clear_to_color(bkg_color);
@@ -316,12 +345,12 @@ namespace RedEngine
 
 	int Manager::getWidth()
 	{
-		return width;
+		return virtual_width;
 	}
 
 	int Manager::getHeight()
 	{
-		return height;
+		return virtual_height;
 	}
 
 	void Manager::shouldDrawBackScene(bool draw, bool update)

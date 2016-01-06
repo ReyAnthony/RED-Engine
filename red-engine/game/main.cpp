@@ -108,9 +108,9 @@ int main(int argc, char** argv)
 	 *			- etc...
 	 */
 
-	RedEngine::Manager* game = new RedEngine::Manager(640, 480, "RedEngine Test");
+	RedEngine::Manager* game = new RedEngine::Manager(640, 480, 1280, 720, "RedEngine Test", true);
 
-	game->setBackgroundColor(170,170,170);
+	game->setBackgroundColor(0,0,0);
 	init_resources(game);
 	init_map_bindings(game);
 

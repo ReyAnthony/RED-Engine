@@ -72,7 +72,8 @@ namespace RedEngine
 	class Manager
 	{
 		public:
-			Manager(int width, int height, const char* title);
+			Manager(int virtual_width, int virtual_height, int real_width, int real_height, const char* title,
+			bool isFullscreen);
 			~Manager();
 
 			//must be called after creating the class
@@ -134,13 +135,16 @@ namespace RedEngine
 			SoundEngine* soundEngine;
 
 			//variables
-			int width;
-			int height;
+			int virtual_width;
+			int virtual_height;
+			int real_width;
+			int real_height;
 			bool running;
 			bool redraw;
 			const char* title;
 			bool drawBackScene = false;
 			bool updateBackScene = false;
+			bool isFullscreen;
 
 			//allegro
 			ALLEGRO_DISPLAY* display;
