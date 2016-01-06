@@ -47,6 +47,7 @@ red_engine.a: engine_core.o keyboard_engine.o map.o collision_engine.o transitio
 	collision_engine.o \
 	transitions.o \
 	gui_component.o
+	ranlib $(LIB_PATH)lib/red_engine.a
 
 copy_hpp:
 	mkdir -p $(LIB_PATH)include/red_engine/
