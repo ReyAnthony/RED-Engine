@@ -17,7 +17,6 @@
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <sys/time.h>
 #include "transition_scene.hpp"
 #include "../game_resources.hpp"
 
@@ -75,6 +74,11 @@ void QuitTransitionScene::update() {
     if(transition->isFinished())
     {
         counter++;
+
+        if(counter >= 120)
+        {
+            this->getManager()->stop(RedEngine::StopCodes::PLAYER_EXIT);
+        }
     }
 }
 
@@ -97,11 +101,5 @@ void QuitTransitionScene::draw() {
         al_draw_text(getManager()->getFont(game_resources::VALIANT_25), al_map_rgb(255,255,255),
                      center_w, center_h + 25, ALLEGRO_ALIGN_CENTRE,
                      "The scribes are writting down your gallant deeds ...");
-
-        if(counter >= 120)
-        {
-            this->getManager()->stop(RedEngine::StopCodes::PLAYER_EXIT);
-        }
-
     }
 }

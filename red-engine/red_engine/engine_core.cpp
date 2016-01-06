@@ -152,7 +152,7 @@ namespace RedEngine
 				update(&ev);
 				redraw = true;	
 			}
-			else
+			else if(ev.type == ALLEGRO_EVENT_KEY_DOWN || ev.type == ALLEGRO_EVENT_KEY_UP)
 			{
 				keyboard_engine.update(&ev);
 			}
