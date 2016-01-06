@@ -58,27 +58,27 @@ copy_hpp:
 	cp $(engine)gui_component.hpp $(LIB_PATH)include/red_engine/gui_component.hpp
 
 #must use implicit rules to reduce
-engine_core.o:
+engine_core.o:$(engine)engine_core.cpp
 	$(CC) $(CCFLAGS) -c \
 	$(engine)engine_core.cpp
 
-keyboard_engine.o:
+keyboard_engine.o:$(engine)keyboard_engine.cpp
 	$(CC) $(CCFLAGS) -c \
 	$(engine)keyboard_engine.cpp
 
-map.o:
+map.o:$(engine)map.cpp
 	$(CC) $(CCFLAGS) -c \
 	$(engine)map.cpp
 
-collision_engine.o:
+collision_engine.o:$(engine)collision_engine.cpp
 	$(CC) $(CCFLAGS) -c \
 	$(engine)collision_engine.cpp
 
-transitions.o:
+transitions.o:$(engine)transitions.cpp
 	$(CC) $(CCFLAGS) -c \
 	$(engine)transitions.cpp
 
-gui_component.o:
+gui_component.o:$(engine)gui_component.cpp
 	$(CC) $(CCFLAGS) -c \
 	$(engine)gui_component.cpp
 

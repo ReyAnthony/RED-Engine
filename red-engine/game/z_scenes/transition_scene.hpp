@@ -47,7 +47,6 @@ public:
     void init();
     void update();
     void draw();
-
     int counter = 0;
 
 private:

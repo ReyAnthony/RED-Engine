@@ -17,6 +17,7 @@
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include <sys/time.h>
 #include "transition_scene.hpp"
 #include "../game_resources.hpp"
 
@@ -73,7 +74,7 @@ void QuitTransitionScene::update() {
 
     if(transition->isFinished())
     {
-
+        counter++;
     }
 }
 
@@ -98,8 +99,9 @@ void QuitTransitionScene::draw() {
                      "The scribes are writting down your gallant deeds ...");
 
         if(counter >= 120)
+        {
             this->getManager()->stop(RedEngine::StopCodes::PLAYER_EXIT);
+        }
 
-        counter++;
     }
 }

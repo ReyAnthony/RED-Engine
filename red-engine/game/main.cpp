@@ -74,7 +74,7 @@ int main(int argc, char** argv)
 
 	//TODO exceptions instead of STOP codes
 	//TODO GUI Builder
-	//TODO resolution independance
+	//TODO resolution independance (started but hardcoded for 16/9)
 
 	//TODO borg
 	/*
@@ -108,7 +108,7 @@ int main(int argc, char** argv)
 	 *			- etc...
 	 */
 
-	RedEngine::Manager* game = new RedEngine::Manager(640, 480, 1280, 720, "RedEngine Test", true);
+	RedEngine::Manager* game = new RedEngine::Manager(640, 480, 1280, 720, "RedEngine Test", false);
 
 	game->setBackgroundColor(0,0,0);
 	init_resources(game);

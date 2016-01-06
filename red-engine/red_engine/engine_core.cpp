@@ -155,12 +155,6 @@ namespace RedEngine
 			else
 			{
 				keyboard_engine.update(&ev);
-				/*
-				if (keyboard_engine.isKeyPressed(ALLEGRO_KEY_ESCAPE))
-				{
-					stop(PLAYER_EXIT);
-				}
-				 */
 			}
 
 			//drawing
@@ -233,6 +227,7 @@ namespace RedEngine
 		//aspect ratio calculations
 		int width = (real_width / 4 ) * 3;
 
+		//redrawing the scaled bitmap to the backbuffer
 		al_set_target_bitmap(al_get_backbuffer(this->display));
 		al_draw_scaled_bitmap(bmp, 0, 0,
 							  virtual_width,virtual_height,
