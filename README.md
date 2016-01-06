@@ -1,5 +1,6 @@
 # RED-Engine
-C++ Game Engine based on Allegro5 and java map editor
+C++ Game Engine based on Allegro5 and java map editor.
+
 Currently I tested and got it to work on : 
 - OSX
 - Trisquel GNU/Linux (Debian / Ubuntu based)
