@@ -74,7 +74,39 @@ int main(int argc, char** argv)
 
 	//TODO exceptions instead of STOP codes
 	//TODO GUI Builder
-	//TODO resolution independance 
+	//TODO resolution independance
+
+	//TODO borg
+	/*
+	 * 	The borg should have the following phases :
+	 *
+	 * 	1) EXPLORATION_PHASE
+	 * 		During this phase, the borg is pathfinding to every reachable locations
+	 * 		on the map.
+	 * 		As soon as it cannot find any unvisited place anymore, the borg will go
+	 * 		to the EXIT_CAVE phase.
+	 *
+	 * 	2) EXIT_CAVE
+	 * 		The borg will go to the nearest exit point (upward if there is no downward exit)
+	 *
+	 * 	3) THREAT_ASSESSEMENT
+	 * 		If there is enemies in the borg's line of sight, it will assess the threat.
+	 * 		If the threat is LOW or NORMAL, the borg will go to the FIGHT phase.
+	 * 		Otherwize, the FLEE phase is used.
+	 *
+	 *	4) FIGHT
+	 *		The borg will try to defeat his opponents.
+	 *
+	 *	5) FLEE
+	 *		The borg will try to loose its opponenents
+	 *
+	 *	6) STATUS_CHECK
+	 *		Each time the borg is damaged, it performs a STATUS_CHECK.
+	 *		It tries to :
+	 *			- Eat
+	 *			- Heal itself
+	 *			- etc...
+	 */
 
 	RedEngine::Manager* game = new RedEngine::Manager(640, 480, "RedEngine Test");
 
