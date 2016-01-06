@@ -126,11 +126,14 @@ namespace RedEngine
 			std::vector<MapAtom***> getAtoms();
 
 		private:
+			void updateOffsets();
 			std::vector<MapAtom***> atomsByLayers;
 			std::string mapName;	
 			int xmax, ymax;
 			int x_offset = 0;
 			int y_offset = 0;
+
+			int start_x, start_y;
 	};
 }
 

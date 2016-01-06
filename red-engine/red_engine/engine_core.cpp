@@ -153,8 +153,8 @@ namespace RedEngine
 			//drawing
 			if (al_is_event_queue_empty(event_queue) && redraw)
 			{
-				redraw = false;
 				draw();
+				redraw = false;
 			}
 		}
 	}

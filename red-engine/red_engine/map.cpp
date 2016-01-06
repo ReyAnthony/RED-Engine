@@ -167,30 +167,32 @@ namespace RedEngine
 
 	void Map::init()
 	{
-		//nothing to do ?
+		updateOffsets();
+	}
+
+	void Map::updateOffsets() {
+
+		int width = this->getManager()->getWidth();
+		int height = this->getManager()->getHeight();
+
+		ymax = ((height / 64) + 2 - (y_offset / 64) );
+		xmax = ((width / 64) + 2 - (x_offset / 64) );
+
+		start_x = (x_offset * -1) / 64;
+		start_y = (y_offset * -1) / 64;
 	}
 
 	void Map::update()
 	{
-
+		updateOffsets();
 	}
 
 	void Map::draw()
 	{
-		//TODO show only what we must
-		int width = this->getManager()->getWidth();
-		int height = this->getManager()->getHeight();
-
-		int ymax = ((height / 64) + 2 - (y_offset / 64) );
-		int xmax = ((width / 64) + 2 - (x_offset / 64) );
-
-		int startx = (x_offset * -1) / 64;
-		int starty = (y_offset * -1) / 64;
-
 		MapAtom*** map = atomsByLayers.at(0);
-		for (int y = starty; y < ymax; y++)
+		for (int y = start_y; y < ymax; y++)
 		{
-			for(int x = startx; x < xmax; x++)
+			for(int x = start_x; x < xmax; x++)
 			{
 				map[y][x]->getSprite()->draw();
 			}
