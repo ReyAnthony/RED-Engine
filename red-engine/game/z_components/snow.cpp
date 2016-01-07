@@ -64,6 +64,7 @@ void SnowFlake::setSize(int size)
 
 void SnowFlake::draw()
 {
+	//TODO remove allegro code
     al_draw_filled_circle(x, y, size, al_map_rgb(240,240,240));
 }
 
@@ -112,11 +113,8 @@ void SnowComponent::update()
 
 void SnowComponent::draw()
 {
-
-    al_identity_transform(&camera_transform);
-    al_translate_transform(&camera_transform, 0, 0);
-    al_use_transform(&camera_transform);
-
+    getManager()->resetTransformTranslate();
+	
     int i;
     for(i = 0; i < snowFlakes_count; i++)
     {

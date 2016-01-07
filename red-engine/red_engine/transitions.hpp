@@ -27,7 +27,7 @@ namespace RedEngine
     class TransitionTypeA : public GameComponent
     {
         public:
-            TransitionTypeA(bool showBackScene);
+            TransitionTypeA();
             ~TransitionTypeA();
             void start();
             bool isFinished();
@@ -38,7 +38,6 @@ namespace RedEngine
             int y;
             bool done = false;
             bool started = false;
-            bool showBackScene = false;
             int speed = 25;
 
             void init();

@@ -30,7 +30,7 @@ TransitionScene::~TransitionScene() {
 
 void TransitionScene::init() {
 
-    transition = new RedEngine::TransitionTypeB(true);
+    transition = new RedEngine::TransitionTypeB();
     addComponent(transition);
     transition->start();
     this->getManager()->getSoundEngine()->playSound(game_resources::TRANS_1);
@@ -61,7 +61,7 @@ QuitTransitionScene::~QuitTransitionScene() {
 
 void QuitTransitionScene::init() {
 
-    transition = new RedEngine::TransitionTypeA(true);
+    transition = new RedEngine::TransitionTypeA();
     addComponent(transition);
     transition->start();
     this->getManager()->getSoundEngine()->playSound(game_resources::TRANS_2);
@@ -87,11 +87,7 @@ void QuitTransitionScene::draw() {
     if(transition->isFinished())
     {
         //TODO remove allegro references and improve, as this is just to test...
-
-        ALLEGRO_TRANSFORM camera_transform;
-        al_identity_transform(&camera_transform);
-        al_translate_transform(&camera_transform, 0, 0);
-        al_use_transform(&camera_transform);
+       getManager()->resetTransformTranslate();
 
         int center_w = getManager()->getWidth() / 2;
         int center_h = getManager()->getHeight() / 2;

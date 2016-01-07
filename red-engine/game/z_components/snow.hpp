@@ -57,7 +57,6 @@ class SnowComponent : public RedEngine::GameComponent
     private:
         SnowFlake** snowFlakes;
         int snowFlakes_count;
-        ALLEGRO_TRANSFORM camera_transform;
 };
 
 

@@ -113,13 +113,8 @@ void PlayerMap::update() {
 void PlayerMap::draw(){
 
     //everything is getting moved
-    //TODO I DONT WANT TO SEE ANYTHING ALLEGRO RELATED IN THE GAME CODE !!!
-    //If we don't put allegro code, we can port the engine to anything,
-    //we just need to modify the engine.
-    al_identity_transform(&camera_transform);
-    al_translate_transform(&camera_transform, this->x_offset, this->y_offset);
-    al_use_transform(&camera_transform);
-
+	getManager()->transformTranslate(x_offset, y_offset);
     RedEngine::Map::draw();
     this->playerComponent->draw();
+	getManager()->resetTransformTranslate();
 }

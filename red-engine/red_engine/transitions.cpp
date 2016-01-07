@@ -22,9 +22,8 @@
 namespace RedEngine {
 
     //a transition is never on the back
-    TransitionTypeA::TransitionTypeA(bool showBackScene) : GameComponent(false)
+    TransitionTypeA::TransitionTypeA() : GameComponent(false)
     {
-        this->showBackScene = showBackScene;
     }
 
     TransitionTypeA::~TransitionTypeA()
@@ -37,8 +36,6 @@ namespace RedEngine {
         x = 0;
         y = 0;
         done = false;
-
-        this->getManager()->shouldDrawBackScene(showBackScene, false);
     }
 
     void TransitionTypeA::start()
@@ -53,7 +50,6 @@ namespace RedEngine {
 
             if (y >= this->getManager()->getHeight()) {
                 done = true;
-                this->getManager()->shouldDrawBackScene(false, false);
             }
         }
     }
@@ -85,8 +81,6 @@ namespace RedEngine {
         x = this->getManager()->getWidth();
         y = this->getManager()->getHeight();
         done = false;
-
-        this->getManager()->shouldDrawBackScene(showBackScene, false);
     }
 
     void TransitionTypeB::update()
@@ -96,7 +90,6 @@ namespace RedEngine {
 
             if (y <= 0) {
                 done = true;
-                this->getManager()->shouldDrawBackScene(false, false);
             }
         }
     }

@@ -24,7 +24,7 @@ namespace RedEngine
 
 	//##############  Manager class ############## 
 	Manager::Manager(int virtual_width, int virtual_height, int real_width, int real_height, const char* title,
-					 bool isFullscreen)
+					 bool isFullscreen, bool isResizable)
 	{
 		if(virtual_width < 640)
 			virtual_width = 640;
@@ -50,6 +50,7 @@ namespace RedEngine
 		timer = nullptr;
 		redraw = true;
 		this->isFullscreen = isFullscreen;
+		this->isResizable = isResizable;
 
 		this->title = title;
 
@@ -87,7 +88,8 @@ namespace RedEngine
 	{
 		//let's create the datapool first, so if it bug, we don't have a nullptr ref 
 		datapool = new DataPool();
-		soundEngine = new SoundEngine(this);
+		soundEngine = new SoundEngine(datapool);
+		console = new Console(this);
 
 		//Initializing allegro
 		if (!al_init())
@@ -115,6 +117,11 @@ namespace RedEngine
 		{
 			//TODO upon quitting there is an exception on OSX
 			al_set_new_display_flags(ALLEGRO_FULLSCREEN_WINDOW);
+		}
+		
+		if(isResizable)
+		{
+			al_set_new_display_flags(al_get_new_display_flags() | ALLEGRO_RESIZABLE);
 		}
 
 		display = al_create_display(real_width, real_height);
@@ -149,12 +156,13 @@ namespace RedEngine
 			//update
 			if (ev.type == ALLEGRO_EVENT_TIMER)
 			{
-				update(&ev);
+				update(&ev);		
 				redraw = true;	
 			}
 			else if(ev.type == ALLEGRO_EVENT_KEY_DOWN || ev.type == ALLEGRO_EVENT_KEY_UP)
 			{
 				keyboard_engine.update(&ev);
+				
 			}
 
 			//drawing
@@ -170,29 +178,19 @@ namespace RedEngine
 	{
 		running = false;
 		if(code != PLAYER_EXIT)
-			std::cout << "STOPPED - " << "Stop Code : " <<  code << std::endl;
+			std::cerr << "STOPPED - " << "Stop Code : " <<  code << std::endl;
 	}
 
 	void Manager::update(ALLEGRO_EVENT* ev)
 	{
-
-		if(updateBackScene)
-		{
-			//TODO HACK => That's ugly. A vector would be better suited i think.
-			GameScene* current = game_scenes.top();
-			game_scenes.pop();
-
-			if(game_scenes.top() != nullptr)
-			{
-				game_scenes.top()->updateComponents();
-				game_scenes.top()->update();
-			}
-
-			game_scenes.push(current);
-		}
-
 		game_scenes.top()->updateComponents();
 		game_scenes.top()->update();
+		console->update();
+		
+		if(keyboard_engine.isKeyPressed(ALLEGRO_KEY_SPACE))
+		{
+			console->changeState();
+		}
 	}
 
 	void Manager::draw()
@@ -201,41 +199,38 @@ namespace RedEngine
 		ALLEGRO_BITMAP* bmp = al_create_bitmap(virtual_width, virtual_height);
 		al_set_target_bitmap(bmp);
 
-		//back is drawn BEFORE
-		if(drawBackScene)
-		{
-			//TODO HACK => That's ugly. A vector would be better suited i think.
-			GameScene* current = game_scenes.top();
-			game_scenes.pop();
-
-			if(game_scenes.top() != nullptr) {
-				game_scenes.top()->drawComponentsBack();
-				game_scenes.top()->draw();
-				game_scenes.top()->drawComponentsFront();
-			}
-
-			game_scenes.push(current);
-		}
-
 		game_scenes.top()->drawComponentsBack();
 		game_scenes.top()->draw();
 		game_scenes.top()->drawComponentsFront();
+		
+		console->draw();
 
 		//resizing and drawing
-		//TODO this seems pretty slow ?
+		//TODO this might be pretty slow ?
 		//TODO harcoded for 4/3 to 16/9
 		//aspect ratio calculations
-		int width = (real_width / 4 ) * 3;
+		//int width = (real_width / 4 ) * 3;
 
 		//redrawing the scaled bitmap to the backbuffer
+		//TODO add black box if 4/3 on a 16/9 screen
 		al_set_target_bitmap(al_get_backbuffer(this->display));
-		al_draw_scaled_bitmap(bmp, 0, 0,
+		/*al_draw_scaled_bitmap(bmp, 0, 0,
 							  virtual_width,virtual_height,
 							  (width / 3) / 2, 0 ,
-							  width, real_height, 0);
+							  width, real_height, 0); */
+
+
+        //TODO real_width and height don't get updated on OSX !!
+        //To be precise, it seems that Windows is resizing the whole render
+        //This might be because of DirectX
+		al_draw_scaled_bitmap(bmp, 0, 0, 
+								virtual_width, virtual_height,
+								0,0, real_width, real_height, 0);
 
 		al_flip_display();
 		al_clear_to_color(bkg_color);
+		
+		al_destroy_bitmap(bmp);
 	}
 
 	void Manager::pushScene(GameScene* scene)
@@ -247,7 +242,9 @@ namespace RedEngine
 
 	void Manager::popScene()
 	{
+		GameScene* scene = game_scenes.top();
 		game_scenes.pop();
+		delete scene;
 	}
 
 	SoundEngine* Manager::getSoundEngine() {
@@ -326,8 +323,7 @@ namespace RedEngine
 		catch(StopCodes e)
 		{
 			stop(e);
-		}
-		
+		}		
 	}
 
 	void Manager::setBackgroundColor(unsigned int r, unsigned int g, unsigned int b)
@@ -347,11 +343,17 @@ namespace RedEngine
 	{
 		return virtual_height;
 	}
-
-	void Manager::shouldDrawBackScene(bool draw, bool update)
+	
+	void Manager::transformTranslate(int x, int y)
 	{
-		this->drawBackScene = draw;
-		this->updateBackScene = update;
+		al_identity_transform(&camera_transform);
+        al_translate_transform(&camera_transform, x, y);
+        al_use_transform(&camera_transform);
+	}
+	
+	void Manager::resetTransformTranslate()
+	{
+		transformTranslate(0,0);
 	}
 
 	//############## GameScene class ############## 
@@ -437,251 +439,60 @@ namespace RedEngine
 		return &keyboard_engine;
 	}
 
-	//############## Datapool class ############## 
-	DataPool::DataPool()
-	{
-	}
 
-	//TODO
-	DataPool::~DataPool()
+	//################# CONSOLE ############
+	//We don't remove it all from the engine when compiling without debug
+	//because one might calling it. It will just do nothing. 
+	Console::Console(Manager* manager)
 	{
-		//must clean data !!!
-	}
-	//Accessors
-	ALLEGRO_BITMAP*& DataPool::getSprite(std::string key)
-	{
-		//exception handling needed
-		return sprites_map[key];
-	}
-
-	ALLEGRO_SAMPLE* DataPool::getSound(std::string key)
-	{
-		//exception handling needed
-		return sounds_map[key];
-	}
-
-	ALLEGRO_FONT* DataPool::getFont(std::string key)
-	{
-		//exception handling needed
-		return fonts_map[key];
-	}
-
-	//Mutators
-	void DataPool::addSprite(std::string key, const char* file)
-	{
-		ALLEGRO_BITMAP* sprite = al_load_bitmap(file);
-		al_convert_mask_to_alpha(sprite, al_map_rgb(0,0,0));
-		if(nullptr != sprite)
-		{
-			sprites_map[key] = sprite;
-		}
-		else
-		{
-			throw RES_NOT_FOUND;
-		}
+		this->manager = manager;
+		consoleHeight = getManager()->getHeight()/4;
+		consoleWidth = getManager()->getWidth();
 		
-	}
-
-	void DataPool::addSound(std::string key, const char* file)
-	{
-		ALLEGRO_SAMPLE* sample = al_load_sample(file);
-		if(nullptr != sample)
-		{
-			sounds_map[key] = sample;
-		}
-		else
-		{
-			throw RES_NOT_FOUND;
-		}
-		
-	}
-
-	void DataPool::addFont(std::string key, const char* file, unsigned int size)
-	{
-		ALLEGRO_FONT* font = al_load_ttf_font(file, size , 0);
-		if(nullptr != font)
-		{
-			fonts_map[key] = font;
-		}
-		else
-		{
-			throw RES_NOT_FOUND;
-		}
-		
-	}
-
-	void DataPool::deleteSprite(std::string key)
-	{
-		//check if key exist
-	}
-
-	void DataPool::deleteSound(std::string key)
-	{
-
+		this->posy = 0;
+		this->slidespeed = 5;
 	}
 	
-	void DataPool::deleteFont(std::string key)
+	Console::~Console()
 	{
-
-	}
-
-	//################# Sprite class #################### 
-	Sprite::Sprite(ALLEGRO_BITMAP*& sprite) : sprite(sprite)
-	{
-		if(sprite == nullptr)
-		{
-			throw RES_NOT_FOUND;
-		}
-
-		pos_x = 0;
-		pos_y = 0;
 		
 	}
-
-	Sprite::Sprite(ALLEGRO_BITMAP*& sprite, int pos_x, int pos_y) : sprite(sprite)
-	{
-		if(sprite == nullptr)
-		{
-			throw RES_NOT_FOUND;
-		}
 	
-		this->pos_y = pos_y;
-		this->pos_x = pos_x;
-		
-	}
-
-	Sprite::Sprite(ALLEGRO_BITMAP*& sprite, int pos_x, 
-				int pos_y, int size_x, int size_y, int frames_per_directions,
-				int frame_delay) : sprite(sprite)
+	Manager* Console::getManager()
 	{
-		if(sprite == nullptr)
-		{
-			throw RES_NOT_FOUND;
-		}
-	
-		this->pos_y = pos_y;
-		this->pos_x = pos_x;
-		
-		this->size_x = size_x;
-		this->size_y = size_y;
-		this->frames_per_directions = frames_per_directions;
-		this->frame_delay = frame_delay;
-
-		this->is_animated = true;
-	}
-
-	void Sprite::setPosX(int pos_x)
-	{
-		this->pos_x = pos_x;
+		return manager;
 	}
 	
-	void Sprite::setPosY(int pos_y)
+	bool Console::isActive()
 	{
-		this->pos_y = pos_y;
-	}
-
-	int Sprite::getPosX()
+		#if DEBUG
+			return active;
+		#else
+			return false;
+		#endif
+	}	
+	
+	void Console::draw()
 	{
-		return pos_x;
+		#if DEBUG
+			al_draw_filled_rectangle(0,0, consoleWidth, posy, al_map_rgb(0,0,0));
+		#endif
 	}
-
-	int Sprite::getPosY()
+	
+	void Console::changeState()
 	{
-		return pos_y;
+		this->active = !active;
 	}
-
-	void Sprite::setState(int state)
+	
+	void Console::update()
 	{
-		this->state = state;
-	}
-
-	void Sprite::switchAnimState(bool value)
-	{
-		is_animated = value;
-	}
-
-	void Sprite::draw()
-	{
-		//if is animated..
-		if(is_animated)
-		{
-	 		if(frame_delay_counter <= frame_delay)
-			 {
-			 	//frame_delay is not in ms but in draw calls (this is dumb, YES)
-			 	//usually 1 draw = 1/60 of sec 
-			 	//so 60 = 1 sec ?
-			 	frame_delay_counter++;
-			 }
-			 else
-			 {
-			 	
-		 		frame_delay_counter = 0;
-		 		if(current_frame < frames_per_directions - 1)
-		 		{
-		 			//next frame
-		 			current_frame++;
-		 		}
-		 		else
-		 		{
-		 			//reset the anim
-		 			current_frame = 0;
-		 		}
-			 }
-
-			 al_draw_bitmap_region(sprite, 
-			 	//define sprite of region
-			 	(frames_per_directions * size_x * state)
-			 	+
-			 	//adding the current frame pos
-			 	current_frame * size_x,
-			 	0, size_x, size_y, pos_x, pos_y, 0); 
-
-		}
-		else
-		{
-			al_draw_bitmap_region(this->sprite,
-			(frames_per_directions * size_x * state),	
-			0, size_x, size_y, pos_x, pos_y, 0);
-		}		 
-	}
-
-	Sprite::~Sprite()
-	{
-		//nothing do do for now ?
-		//bmp are supposed to be managed by the pool
-	}
-
-	int Sprite::getSizeX() {
-		return this->size_x;
-	}
-
-	int Sprite::getSizeY() {
-		return this->size_y;
-	}
-
-	//##### SOUND ENGINE #####
-
-	SoundEngine::SoundEngine(Manager* manager) {
-		this->managerRef = manager;
-	}
-
-	SoundEngine::~SoundEngine() {
-
-	}
-
-	void SoundEngine::stopMusic() {
-
-		al_stop_sample(&this->current_music);
-	}
-
-	void SoundEngine::startMusic(std::string res) {
-		al_play_sample(managerRef->getSound(res),
-					   1.0, 0,1.0, ALLEGRO_PLAYMODE_LOOP, &this->current_music);
-	}
-
-	void SoundEngine::playSound(std::string res) {
-		al_play_sample(managerRef->getSound(res),
-					   1.0, 0,1.0, ALLEGRO_PLAYMODE_ONCE, nullptr);
+		#if DEBUG
+			if(active && posy <= consoleHeight)
+				posy += slidespeed;
+			
+			if(!active && posy >= 0 - consoleHeight)
+				posy -= slidespeed;
+		#endif 
 	}
 }
 

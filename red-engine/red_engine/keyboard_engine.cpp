@@ -33,7 +33,8 @@ namespace RedEngine
 	//TODO wrapper for allegro keycodes
 	bool KeyboardEngine::isKeyPressed(int key)
 	{
-		return key_map[key];
+		int key_ret = key_map[key];   
+		return key_ret;
 	}
 
 	void KeyboardEngine::update(ALLEGRO_EVENT* ev)

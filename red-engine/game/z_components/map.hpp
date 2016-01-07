@@ -41,7 +41,6 @@ class PlayerMap : public RedEngine::Map {
         PlayerComponent* playerComponent;
         int x_offset = 0;
         int y_offset = 0;
-        ALLEGRO_TRANSFORM camera_transform;
     };
 
 class WalkableMapGenerator : public RedEngine::IGenerator {

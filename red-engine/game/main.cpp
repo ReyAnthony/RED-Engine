@@ -107,8 +107,10 @@ int main(int argc, char** argv)
 	 *			- Heal itself
 	 *			- etc...
 	 */
-
-	RedEngine::Manager* game = new RedEngine::Manager(640, 480, 1280, 720, "RedEngine Test", false);
+	
+	//WVGA (720x480)
+    //TODO fix resize for OSX
+	RedEngine::Manager* game = new RedEngine::Manager(720, 480, 1280, 720, "RedEngine Test", false, false);
 
 	game->setBackgroundColor(0,0,0);
 	init_resources(game);
