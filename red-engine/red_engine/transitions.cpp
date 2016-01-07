@@ -48,7 +48,7 @@ namespace RedEngine {
         if(started) {
             y+= speed;
 
-            if (y >= this->getManager()->getHeight()) {
+            if (y >= this->getManager()->getHeight() + 30) {
                 done = true;
             }
         }

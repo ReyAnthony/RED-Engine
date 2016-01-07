@@ -198,6 +198,7 @@ namespace RedEngine
 		//drawing on a bmp
 		ALLEGRO_BITMAP* bmp = al_create_bitmap(virtual_width, virtual_height);
 		al_set_target_bitmap(bmp);
+		al_clear_to_color(bkg_color);
 
 		game_scenes.top()->drawComponentsBack();
 		game_scenes.top()->draw();
@@ -213,23 +214,24 @@ namespace RedEngine
 
 		//redrawing the scaled bitmap to the backbuffer
 		//TODO add black box if 4/3 on a 16/9 screen
-		al_set_target_bitmap(al_get_backbuffer(this->display));
+		al_set_target_backbuffer(this->display);
 		/*al_draw_scaled_bitmap(bmp, 0, 0,
 							  virtual_width,virtual_height,
 							  (width / 3) / 2, 0 ,
 							  width, real_height, 0); */
+		al_clear_to_color(bkg_color);
 
 
         //TODO real_width and height don't get updated on OSX !!
         //To be precise, it seems that Windows is resizing the whole render
         //This might be because of DirectX
+
 		al_draw_scaled_bitmap(bmp, 0, 0, 
 								virtual_width, virtual_height,
 								0,0, real_width, real_height, 0);
 
-		al_flip_display();
-		al_clear_to_color(bkg_color);
-		
+		al_flip_display();	
+
 		al_destroy_bitmap(bmp);
 	}
 
@@ -446,7 +448,7 @@ namespace RedEngine
 	Console::Console(Manager* manager)
 	{
 		this->manager = manager;
-		consoleHeight = getManager()->getHeight()/4;
+		consoleHeight = getManager()->getHeight()/3;
 		consoleWidth = getManager()->getWidth();
 		
 		this->posy = 0;
