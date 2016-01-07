@@ -95,6 +95,23 @@ namespace RedEngine
 			Manager* manager;
 	};
 
+	class AnimBinding : public IBinding
+	{
+		public:
+	              //fpd == frames per directions 
+	               AnimBinding(bool walkable, std::string spriteName, Manager* manager, int fpd, int delay);
+			~AnimBinding();
+			//each time it creates a new MapAtom
+			MapAtom* bindingAction();
+
+		private:
+			bool walkable;
+			std::string spriteName;
+			Manager* manager;
+	                int fpd; 
+	                int delay;
+	};
+
 	//A MapAtom is the tiniest part of a map
 	class MapAtom 
 	{

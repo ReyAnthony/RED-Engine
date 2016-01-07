@@ -32,6 +32,7 @@
 
     All tiles but hilda.png are from David E. Gervais
     and are released under CC-BY 3.0
+    water.png has been modified by me in order to be animated
 
     hilda.png is from Anthony Rey and is licenced
     under CC BY-NC-ND
@@ -44,7 +45,7 @@ void init_map_bindings(RedEngine::Manager* manager)
 	RedEngine::MapFactory::bind('0', 0, true, game_resources::SNOW, manager);
 	RedEngine::MapFactory::bind('2', 0, true, game_resources::TREES, manager);
 	RedEngine::MapFactory::bind('3', 0, false, game_resources::MOUNTAINS, manager);
-	RedEngine::MapFactory::bind('6', 0, false, game_resources::WATER, manager);
+	RedEngine::MapFactory::bind('6', 0, new RedEngine::AnimBinding(false, game_resources::WATER, manager, 4, 20));
 	RedEngine::MapFactory::bind('7', 0, false, game_resources::WALL, manager);
 
 	//This is used in order to generate a walkable map (playermap)

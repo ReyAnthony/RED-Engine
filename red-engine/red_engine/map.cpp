@@ -129,6 +129,24 @@ namespace RedEngine
 		return new MapAtom(walkable, manager->createSprite(spriteName));
 	}
 	
+        //######### AnimBinding  ############## 
+        AnimBinding::AnimBinding(bool walkable, std::string spriteName, Manager* manager, int fpd, int delay) 
+	{
+		this->walkable = walkable;
+		this->spriteName = spriteName;
+		this->manager = manager;
+		this->fpd = fpd;
+		this->delay = delay;
+	}
+
+	AnimBinding::~AnimBinding()
+	{/*nothing to clean*/}
+
+	MapAtom* AnimBinding::bindingAction()
+	{
+	  return new MapAtom(walkable, manager->createSprite(spriteName, 0, 0, 64, 64, fpd, delay));
+	}
+	
 
 	//###### MAP ATOM ######### 
 	MapAtom::MapAtom(bool walkable, Sprite* sprite)
