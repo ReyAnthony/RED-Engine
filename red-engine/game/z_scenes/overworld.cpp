@@ -50,6 +50,8 @@ void Overworld::update()
 	if(this->getManager()->getKeyBoardEngine()->isKeyPressed(ALLEGRO_KEY_ESCAPE))
 	{
         this->getManager()->getSoundEngine()->stopMusic();
+        //remove the current scene
+        this->getManager()->popScene();
 		this->getManager()->pushScene(new QuitTransitionScene());
 	}
 }

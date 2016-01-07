@@ -67,6 +67,7 @@ namespace RedEngine
 	class GameComponent;
 	class Console;
 	class Sprite;
+    class SoundEngine;
 	
 	//##############  Manager class ############## 
 	//This class manage the game 

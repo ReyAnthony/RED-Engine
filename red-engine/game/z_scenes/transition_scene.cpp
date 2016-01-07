@@ -87,7 +87,7 @@ void QuitTransitionScene::draw() {
     if(transition->isFinished())
     {
         //TODO remove allegro references and improve, as this is just to test...
-       getManager()->resetTransformTranslate();
+        getManager()->resetTransformTranslate();
 
         int center_w = getManager()->getWidth() / 2;
         int center_h = getManager()->getHeight() / 2;
