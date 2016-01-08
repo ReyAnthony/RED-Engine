@@ -36,6 +36,11 @@
 
     hilda.png is from Anthony Rey and is licenced
     under CC BY-NC-ND
+
+    SourceCodePro-Regular.ttf
+    OFL (SIL Open Font License)
+    Paul D. Hunt, Teo Tuominen  
+    Adobe Systems Incorporated  
 */
 
 #include "main.hpp"
@@ -61,7 +66,7 @@ void init_resources(RedEngine::Manager* game)
 	game->addSprite(game_resources::WALL, "res/sprites/wall.png");
 	game->addSprite(game_resources::HILDA, "res/sprites/hilda.png");
 
-	game->addFont(game_resources::ARIAL_15, "res/fonts/Arial.ttf", 15);
+	game->addFont(game_resources::SOURCE_CODE_15, "res/fonts/SourceCodePro-Regular.ttf", 15);
     game->addFont(game_resources::VALIANT_25, "res/fonts/prince_valiant.ttf", 25);
     game->addFont(game_resources::VALIANT_50, "res/fonts/prince_valiant.ttf", 50);
 

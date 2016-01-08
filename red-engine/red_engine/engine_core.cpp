@@ -159,11 +159,13 @@ namespace RedEngine
 				update(&ev);		
 				redraw = true;	
 			}
-			else if(ev.type == ALLEGRO_EVENT_KEY_DOWN || ev.type == ALLEGRO_EVENT_KEY_UP)
+			else if(ev.type == ALLEGRO_EVENT_KEY_DOWN 
+				|| ev.type == ALLEGRO_EVENT_KEY_UP 
+				|| ev.type == ALLEGRO_EVENT_KEY_CHAR)
 			{
-				keyboard_engine.update(&ev);
-				
+				keyboard_engine.update(&ev);	
 			}
+
 
 			//drawing
 			if (al_is_event_queue_empty(event_queue) && redraw)
@@ -187,7 +189,7 @@ namespace RedEngine
 		game_scenes.top()->update();
 		console->update();
 		
-		if(keyboard_engine.isKeyPressed(ALLEGRO_KEY_SPACE))
+		if(keyboard_engine.isKeyPressedNoRepeat(ALLEGRO_KEY_LCTRL))
 		{
 			console->changeState();
 		}
@@ -448,7 +450,7 @@ namespace RedEngine
 	Console::Console(Manager* manager)
 	{
 		this->manager = manager;
-		consoleHeight = getManager()->getHeight()/3;
+		consoleHeight = 25;
 		consoleWidth = getManager()->getWidth();
 		
 		this->posy = 0;
@@ -478,12 +480,83 @@ namespace RedEngine
 	{
 		#if DEBUG
 			al_draw_filled_rectangle(0,0, consoleWidth, posy, al_map_rgb(0,0,0));
+			//TODO insert fonts as a system resource
+			al_draw_text(getManager()->getFont("source_15"), al_map_rgb(255,255,255), 20 , posy - consoleHeight, 0, (char*)edittext.c_str());
+			al_draw_text(getManager()->getFont("source_15"), al_map_rgb(255,255,255), 0, posy - consoleHeight, 0, ">");
 		#endif
 	}
 	
 	void Console::changeState()
 	{
+		//by calling these two, we clear the buffer
+		getManager()->getKeyBoardEngine()->getLastTyped();
+		getManager()->getKeyBoardEngine()->getLastTypedKeycode();
 		this->active = !active;
+	}
+
+	//shamelessy stolen from here : https://wiki.allegro.cc/index.php?title=Text_Input_%28C%2B%2B%29
+	void Console::textInput()
+	{
+		char ASCII  = getManager()->getKeyBoardEngine()->getLastTyped();
+		int keycode = getManager()->getKeyBoardEngine()->getLastTypedKeycode();
+ 
+         // a character key was pressed; add it to the string
+         if(ASCII >= 32 && ASCII <= 126)
+         {
+            // add the new char, inserting or replacing as need be
+            if(iter == edittext.end())
+               iter = edittext.insert(iter, ASCII);
+            iter++;
+         }
+         // some other, "special" key was pressed; handle it here
+         else
+            switch(keycode)
+            {   
+ 			
+               case ALLEGRO_KEY_BACKSPACE:
+                  if(iter != edittext.begin())
+                  {
+                     iter--;
+                     iter = edittext.erase(iter);
+                  }
+	              break; 
+
+               case ALLEGRO_KEY_ENTER:
+
+               	  //TODO bindings 
+                  if(edittext == "bye")
+                  {
+                  	this->getManager()->stop(0);
+                  }
+                  else if(edittext == "close_cli")
+                  {
+                  	//useless command ;)
+                  	this->changeState();
+                  }
+                   else if(edittext == "pop_scene")
+                  {
+                  	getManager()->popScene();
+                  }
+                  else if(edittext == "show_fps")
+                  {
+                  	//TODO
+                  }
+                  else
+                  {
+                  	edittext = "unknown command";
+                  	break;
+                  }
+
+                  edittext = "";
+
+	              break; 
+
+               default:
+               		break;
+            }
+
+            //replace it where it should
+            iter = edittext.end();
 	}
 	
 	void Console::update()
@@ -494,6 +567,9 @@ namespace RedEngine
 			
 			if(!active && posy >= 0 - consoleHeight)
 				posy -= slidespeed;
+
+			if(active)
+				textInput();
 		#endif 
 	}
 }

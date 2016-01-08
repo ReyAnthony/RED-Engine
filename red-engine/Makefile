@@ -13,7 +13,7 @@ CC=g++
 
 #WINDOWS
 #-Wl,--subsystem,windows prevent the console from running in the background
-CCFLAGS=-std=gnu++1y -Wall -O3 -DDEBUG -Wl,--subsystem,windows
+#CCFLAGS=-std=gnu++1y -Wall -O3 -DDEBUG -Wl,--subsystem,windows
 #LIB_PATH=c:/mingw/
 #ALLEGRO=$(LIB_PATH)lib/liballegro-5.0.10-monolith-mt.a
 #OUTPUT=RED.exe

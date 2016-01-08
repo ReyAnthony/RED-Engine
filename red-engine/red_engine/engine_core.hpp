@@ -234,8 +234,9 @@ namespace RedEngine
 			void changeState();
 			Manager* getManager();
 			bool isActive();
+			void textInput();
 		private:
-			bool active = false;	
+			bool active;	
 			Manager* manager;
 			//sliding
 			int posy;
@@ -243,6 +244,9 @@ namespace RedEngine
 			
 			int consoleHeight;
 			int consoleWidth;
+
+		    std::string  edittext;                         // an empty string for editting
+		    std::string::iterator iter = edittext.begin(); // string iterator                
 	};
 }
 

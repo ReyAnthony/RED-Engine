@@ -33,7 +33,7 @@ namespace game_resources
     static std::string HILDA = "hilda";
 
     //FONTS
-    static std::string ARIAL_15 = "arial_15";
+    static std::string SOURCE_CODE_15 = "source_15";
     static std::string VALIANT_50 = "valiant_50";
     static std::string VALIANT_25 = "valiant_25";
 

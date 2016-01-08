@@ -34,13 +34,19 @@ namespace RedEngine
 			~KeyboardEngine();
 
 			bool isKeyPressed(int key);
+			bool isKeyPressedNoRepeat(int key);
 			void update(ALLEGRO_EVENT* ev);
+			char getLastTyped();
+			int getLastTypedKeycode();
 
 		private:
 
 			//int == keycode
 			//bool == isPressed 
 			std::unordered_map<int, bool> key_map;
+			std::unordered_map<int, bool> key_map_no_repeat;
+			char lastTyped = -1;
+			int lastTypedKeycode = -1;
 
 	};
 }

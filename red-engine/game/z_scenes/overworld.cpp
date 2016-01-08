@@ -42,7 +42,8 @@ void Overworld::init()
 	addComponent(map);
 	addComponent(snow);
 
-	getManager()->getSoundEngine()->startMusic(game_resources::OVERWORLD_MUSIC);
+	//shut up
+	//getManager()->getSoundEngine()->startMusic(game_resources::OVERWORLD_MUSIC);
 }
 
 void Overworld::update()
