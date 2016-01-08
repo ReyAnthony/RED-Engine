@@ -17,7 +17,7 @@ I'm looking for people to :
 All tiles but hilda.png are from David E. Gervais
 and are released under CC-BY 3.0.
 Hilda.png is from me and is licenced
-under CC BY-NC-ND. </b>
+under CC BY-NC-ND. More details in main.cpp</b>
 
 Other copyrights :
 <b>
@@ -48,7 +48,7 @@ Current state (Things I will likely do in short time)
 - Ehance the laggy camera movement (and hide allegro references from the game part)
 - Create a makefile ...
 
-+![alt tag](http://anthonyrey.fr/wp-content/uploads/2015/12/Capture-d%E2%80%99e%CC%81cran-2015-12-29-a%CC%80-01.22.38.png)
++![alt tag](http://anthonyrey.fr/wp-content/uploads/2016/01/Capture-d%E2%80%99e%CC%81cran-2016-01-08-a%CC%80-02.47.25-1024x594.png)
 
 The map editor is not finished (no export functions for the moment, but will come in a short time)
 
