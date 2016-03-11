@@ -71,73 +71,6 @@ aspect Console
 	    posy - consoleHeight, 0, ">");
     }
     
-    //shamelessy stolen from here :
-    //https://wiki.allegro.cc/index.php?title=Text_Input_%28C%2B%2B%29
-    void textInput(Manager* manager)
-    {
-       
-	char ASCII  = manager->getKeyBoardEngine()->getLastTyped();
-	int keycode = manager->getKeyBoardEngine()->getLastTypedKeycode();
- 
-        // a character key was pressed; add it to the string
-	if(ASCII >= 32 && ASCII <= 126)
-	{ 
-        // add the new char, inserting or replacing as need be
-	if(iter == edittext.end())
-	    iter = edittext.insert(iter, ASCII);
-	iter++;
-    }
-        // some other, "special" key was pressed; handle it here
-	else
-	    switch(keycode)
-	    {   
- 			
-    case ALLEGRO_KEY_BACKSPACE:
-	if(iter != edittext.begin())
-	{
-	iter--;
-	iter = edittext.erase(iter);
-    }
-	break; 
-
-    case ALLEGRO_KEY_ENTER:
-
-//TODO bindings 
-	if(edittext == "bye")
-	{
-	manager->stop(0);
-    }
-	else if(edittext == "close_cli")
-	{
-//useless command ;)
-	this->changeState(manager);
-    }
-	else if(edittext == "pop_scene")
-	{
-	manager->popScene();
-    }
-	else if(edittext == "show_fps")
-	{
-//TODO
-    }
-	else
-	{
-	edittext = "unknown command";
-	break;
-    }
-
-	edittext = "";
-
-	break; 
-
-    default:
-	break;
-    }
-
-//replace it where it should
-	iter = edittext.end();
-    }
-    
     void changeState(Manager* manager)
     {
 	//by calling these two, we clear the buffer
@@ -150,6 +83,74 @@ aspect Console
     {
 	return active;
     }
+
+    //shamelessy stolen from here :
+    //https://wiki.allegro.cc/index.php?title=Text_Input_%28C%2B%2B%29
+    void textInput(Manager* manager)
+    {
+       
+	char ASCII  = manager->getKeyBoardEngine()->getLastTyped();
+	int keycode = manager->getKeyBoardEngine()->getLastTypedKeycode();
+ 
+	// a character key was pressed; add it to the string
+	if(ASCII >= 32 && ASCII <= 126)
+	{ 
+	    // add the new char, inserting or replacing as need be
+	    if(iter == edittext.end())
+		iter = edittext.insert(iter, ASCII);
+	    iter++;
+	}
+        // some other, "special" key was pressed; handle it here
+	else
+	    switch(keycode)
+	    {   
+ 			
+	    case ALLEGRO_KEY_BACKSPACE:
+		if(iter != edittext.begin())
+		{
+		    iter--;
+		    iter = edittext.erase(iter);
+		}
+		break; 
+
+	    case ALLEGRO_KEY_ENTER:
+
+                //TODO bindings 
+		if(edittext == "bye")
+		{
+		    manager->stop(0);
+		}
+		else if(edittext == "close_cli")
+		{
+                    //useless command ;)
+		    this->changeState(manager);
+		}
+		else if(edittext == "pop_scene")
+		{
+		    manager->popScene();
+		}
+		else if(edittext == "show_fps")
+		{
+                //TODO
+		}
+		else
+		{
+		    edittext = "unknown command";
+		    break;
+		}
+
+		edittext = "";
+
+		break; 
+
+	    default:
+		break;
+	    }
+
+        //replace it where it should
+	iter = edittext.end();
+    }
+    
 	
 };
 
