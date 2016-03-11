@@ -1,0 +1,156 @@
+#ifndef CONSOLE_ASPECT_AH
+#define CONSOLE_ASPECT_AH
+
+#include "engine_core.hpp"
+
+using namespace RedEngine;
+    
+aspect Console
+{
+
+    bool active;
+    // sliding
+    int posy;
+    int slidespeed;
+
+    int consoleHeight;
+    int consoleWidth;
+
+    std::string edittext;
+    // an empty string for editting
+    std::string::iterator iter = edittext.begin(); // string iterator
+
+    Console()
+    {
+	//TODO unhardcode
+	this->consoleHeight = 25;
+	this->consoleWidth = 720;
+		
+	this->posy = 0;
+	this->slidespeed = 5;
+    }
+
+    advice execution ("% RedEngine::Manager::update(...)")
+	&& that(manager) : after (Manager* manager) 
+    {
+	this->update(manager);
+	if(manager->getKeyBoardEngine()->isKeyPressedNoRepeat(ALLEGRO_KEY_LCTRL))
+	{
+	    this->changeState(manager);  
+	}
+    }
+
+    advice execution ("% RedEngine::Manager::drawAll(...)")
+	&& that(manager) : after (Manager* manager)
+    {
+	this->draw(manager);
+    }
+
+    void update(Manager* manager)
+    {
+	if(active && posy <= consoleHeight)
+	    posy += slidespeed;
+			
+	if(!active && posy >= 0 - consoleHeight)
+	    posy -= slidespeed;
+
+	if(active)
+	    textInput(manager); 
+    }
+     
+    void draw(Manager* manager)
+    {
+	al_draw_filled_rectangle(0,0, consoleWidth, posy, al_map_rgb(0,0,0));
+	al_draw_text(manager->getFont("source_15"),
+	    al_map_rgb(255,255,255), 20 ,
+	    posy - consoleHeight, 0,
+	    (char*)edittext.c_str());
+	
+	al_draw_text(manager->getFont("source_15"),
+	    al_map_rgb(255,255,255), 0,
+	    posy - consoleHeight, 0, ">");
+    }
+    
+    //shamelessy stolen from here :
+    //https://wiki.allegro.cc/index.php?title=Text_Input_%28C%2B%2B%29
+    void textInput(Manager* manager)
+    {
+       
+	char ASCII  = manager->getKeyBoardEngine()->getLastTyped();
+	int keycode = manager->getKeyBoardEngine()->getLastTypedKeycode();
+ 
+        // a character key was pressed; add it to the string
+	if(ASCII >= 32 && ASCII <= 126)
+	{ 
+        // add the new char, inserting or replacing as need be
+	if(iter == edittext.end())
+	    iter = edittext.insert(iter, ASCII);
+	iter++;
+    }
+        // some other, "special" key was pressed; handle it here
+	else
+	    switch(keycode)
+	    {   
+ 			
+    case ALLEGRO_KEY_BACKSPACE:
+	if(iter != edittext.begin())
+	{
+	iter--;
+	iter = edittext.erase(iter);
+    }
+	break; 
+
+    case ALLEGRO_KEY_ENTER:
+
+//TODO bindings 
+	if(edittext == "bye")
+	{
+	manager->stop(0);
+    }
+	else if(edittext == "close_cli")
+	{
+//useless command ;)
+	this->changeState(manager);
+    }
+	else if(edittext == "pop_scene")
+	{
+	manager->popScene();
+    }
+	else if(edittext == "show_fps")
+	{
+//TODO
+    }
+	else
+	{
+	edittext = "unknown command";
+	break;
+    }
+
+	edittext = "";
+
+	break; 
+
+    default:
+	break;
+    }
+
+//replace it where it should
+	iter = edittext.end();
+    }
+    
+    void changeState(Manager* manager)
+    {
+	//by calling these two, we clear the buffer
+	manager->getKeyBoardEngine()->getLastTyped();
+	manager->getKeyBoardEngine()->getLastTypedKeycode();
+	this->active = !active;
+    }
+    
+    bool isActive()
+    {
+	return active;
+    }
+	
+};
+
+#endif

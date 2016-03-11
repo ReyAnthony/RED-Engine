@@ -27,7 +27,6 @@
 class TransitionScene : public RedEngine::GameScene  {
 
     public:
-        TransitionScene();
         ~TransitionScene();
         //called when pushing scene
         void init();
@@ -41,7 +40,6 @@ class TransitionScene : public RedEngine::GameScene  {
 class QuitTransitionScene : public RedEngine::GameScene  {
 
 public:
-    QuitTransitionScene();
     ~QuitTransitionScene();
     //called when pushing scene
     void init();

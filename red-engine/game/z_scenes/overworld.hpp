@@ -62,7 +62,6 @@
 class Overworld : public RedEngine::GameScene
 {
 	public:
-		Overworld();
 		~Overworld();
 		//called when pushing scene
 		void init();

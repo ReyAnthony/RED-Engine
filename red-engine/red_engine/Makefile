@@ -9,6 +9,8 @@
     #I personnaly run the makefile from babun shell on Windows (don't forget to add mingw/bin to path)
     #UNCOMMENT THE FOR WIN VALUES AND COMMENT THE OTHERS
 
+#THIS PROJECT USE ASPECTC++ It needs to be added to the path
+ASPECTCC=ag++
 CC=g++
 
 #WINDOWS
@@ -19,19 +21,19 @@ CC=g++
 #OUTPUT=RED.exe
 
 #OSX (Linux ?)
-CCFLAGS=-std=gnu++1y -Wall -O3 -DDEBUG
+CCFLAGS= -std=c++11 -Wall -O3 -DDEBUG
 LIB_PATH=/usr/local/
 ALLEGRO=`pkg-config --cflags --libs allegro-5.0 allegro_acodec-5.0 allegro_audio-5.0 allegro_color-5.0 allegro_dialog-5.0 allegro_font-5.0 allegro_image-5.0 allegro_main-5.0 allegro_memfile-5.0 allegro_physfs-5.0 allegro_primitives-5.0 allegro_ttf-5.0`
 OUTPUT=RED.out
 
-engine=red_engine/
-game=game/
+engine=./
+game=../game/
 
 all:$(OUTPUT)
 
 #We should have one goal for each .cpp file
 $(OUTPUT) : red_engine.a
-	$(CC) $(CCFLAGS) \
+	$(CC)  $(CCFLAGS) \
 	-o $(game)$(OUTPUT) \
 	$(game)main.cpp \
 	$(game)z_scenes/overworld.cpp \
@@ -67,41 +69,39 @@ copy_hpp:
 	cp $(engine)sound_engine.hpp $(LIB_PATH)include/red_engine/sound_engine.hpp
 	cp $(engine)sprite.hpp $(LIB_PATH)include/red_engine/sprite.hpp
 	cp $(engine)datapool.hpp $(LIB_PATH)include/red_engine/datapool.hpp
-	
 
 #must use implicit rules to reduce
 engine_core.o:$(engine)engine_core.cpp
-	$(CC) $(CCFLAGS) -c \
+	$(ASPECTCC) $(CCFLAGS) -c \
 	$(engine)engine_core.cpp
 
 keyboard_engine.o:$(engine)keyboard_engine.cpp
-	$(CC) $(CCFLAGS) -c \
+	$(ASPECTCC) $(CCFLAGS) -c \
 	$(engine)keyboard_engine.cpp
 
 map.o:$(engine)map.cpp
-	$(CC) $(CCFLAGS) -c \
+	$(ASPECTCC) $(CCFLAGS) -c \
 	$(engine)map.cpp
 
 collision_engine.o:$(engine)collision_engine.cpp
-	$(CC) $(CCFLAGS) -c \
+	$(ASPECTCC) $(CCFLAGS) -c \
 	$(engine)collision_engine.cpp
 
 transitions.o:$(engine)transitions.cpp
-	$(CC) $(CCFLAGS) -c \
+	$(ASPECTCC) $(CCFLAGS) -c \
 	$(engine)transitions.cpp
-	
-sound_engine.o:$(engine)sound_engine.cpp
-	$(CC) $(CCFLAGS) -c \
-	$(engine)sound_engine.cpp
-	
-sprite.o:$(engine)sprite.cpp
-	$(CC) $(CCFLAGS) -c \
-	$(engine)sprite.cpp
-	
-datapool.o:$(engine)datapool.cpp
-	$(CC) $(CCFLAGS) -c \
-	$(engine)datapool.cpp
 
+sound_engine.o:$(engine)sound_engine.cpp
+	$(ASPECTCC) $(CCFLAGS) -c \
+	$(engine)sound_engine.cpp
+
+sprite.o:$(engine)sprite.cpp
+	$(ASPECTCC) $(CCFLAGS) -c \
+	$(engine)sprite.cpp
+
+datapool.o:$(engine)datapool.cpp
+	$(ASPECTCC) $(CCFLAGS) -c \
+	$(engine)datapool.cpp
 
 #CLEAN
 clean:clean-engine

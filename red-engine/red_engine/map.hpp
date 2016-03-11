@@ -1,20 +1,20 @@
 /*
-	map.hpp is part of
-	RED-ENGINE - An Object-Oriented game engine based on Allegro5
-	Copyright (C) 2015 - 2016 Anthony REY
+  map.hpp is part of
+  RED-ENGINE - An Object-Oriented game engine based on Allegro5
+  Copyright (C) 2015 - 2016 Anthony REY
 
-	This program is free software: you can redistribute it and/or modify
-			it under the terms of the GNU General Public License as published by
-	the Free Software Foundation, either version 3 of the License, or
-	(at your option) any later version.
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
 
-	This program is distributed in the hope that it will be useful,
-			but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU General Public License for more details.
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
 
-	You should have received a copy of the GNU General Public License
-	along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #ifndef MAP_H
@@ -25,133 +25,142 @@
 
 namespace RedEngine
 {
-	//forward declarations
-	class MapFactory;
-	class IBinding;
-	class MapAtom;
-	class Map;
-	class IGenerator;
+    //forward declarations
+    class MapFactory;
+    class IBinding;
+    class MapAtom;
+    class Map;
+    class IGenerator;
 
-	class MapFactory 
-	{
-		public:
-			//no constructor, this is MOSTLY a factory
-			//sprite => NOPE, needs a MapAtom (be careful not to use differents sprites, as it will increase mem usage)
-			//contract : replace a binding if letterBinding already exist in the layer, BUT print a warning if so 
-			//layers are created at runtime when requested
-			static void bind(char letterBinding, int layer, bool isWalkable, std::string spriteName, Manager* manager);
-			static void bind(char letterBinding, int layer, IBinding* customBinding);
+    class MapFactory 
+    {
+    public:
+	//no constructor, this is MOSTLY a factory
+	//sprite => NOPE, needs a MapAtom
+	//(be careful not to use differents sprites, as it will increase mem usage)
+	//contract : replace a binding if letterBinding already exist in the layer,
+	//BUT print a warning if so 
+	//layers are created at runtime when requested
+	static void bind(char letterBinding, int layer,
+			 bool isWalkable, std::string spriteName, Manager* manager);
+	static void bind(char letterBinding, int layer, IBinding* customBinding);
 
-			//Set the callBack used to create the map (eg : used for generating a subclass of MAP)
-			static void bindGenerator(IGenerator* generator);
+	//Set the callBack used to create the map
+	//(eg : used for generating a subclass of MAP)
+	static void bindGenerator(IGenerator* generator);
 
-			//TODO unbind
-			//static void unbind(char letterBinding, int layer);
+	//TODO unbind
+	//static void unbind(char letterBinding, int layer);
 
-			//the String being the whole map (ok that's bad, find better someday)
-			//contract : fail if there's no map bindings / a map character is unknown
-			static Map* generate(char* map, std::string mapName);
+	//the String being the whole map (ok that's bad, find better someday)
+	//contract : fail if there's no map bindings / a map character is unknown
+	static Map* generate(char* map, std::string mapName);
 
-		private:
-			//TODO not used right now
-			//Arbitrary values are cool !
-			const int MAX_LAYERS = 3;
-			//this is a list of MapAtoms
-			static std::vector<std::unordered_map<char, IBinding*>*> bindings;
-			//if is null, instanciate a normal map
-			static IGenerator* generator;
-	};
+    private:
+	//TODO not used right now
+	//Arbitrary values are cool !
+	const int MAX_LAYERS = 3;
+	//this is a list of MapAtoms
+	static std::vector<std::unordered_map<char, IBinding*>*> bindings;
+	//if is null, instanciate a normal map
+	static IGenerator* generator;
+    };
 
-	class IGenerator
-	{
-		public:
-			//same constructor as the MAP
-			//it's up to the developer to cast to the expected type
-			//has to be given to MapFactory::BindGenerator(IGenerator* generator)
-			virtual Map* generate(std::string mapName, std::vector<MapAtom***> atomsByLayers, int xmax, int ymax) = 0;
-	};
+    class IGenerator
+    {
+    public:
+	//same constructor as the MAP
+	//it's up to the developer to cast to the expected type
+	//has to be given to MapFactory::BindGenerator(IGenerator* generator)
+	virtual Map* generate(std::string mapName,
+			      std::vector<MapAtom***> atomsByLayers,
+			      int xmax, int ymax) = 0;
+    };
 
 
-	class IBinding
-	{
-		public:
-			//the binding should return a MapAtom when called
-			virtual MapAtom* bindingAction() = 0;
-	};
+    class IBinding
+    {
+    public:
+	//the binding should return a MapAtom when called
+	virtual MapAtom* bindingAction() = 0;
+    };
 
-	//generic binding for static void addBinding(char letterBinding, int layer, MapAtom MapAtom);
-	//it will just give back the given atom
-	class GenericBinding : public IBinding
-	{
-		public:
-			GenericBinding(bool walkable, std::string spriteName, Manager* manager);
-			~GenericBinding();
-			//each time it creates a new MapAtom
-			MapAtom* bindingAction();
+    //generic binding for static void addBinding(char letterBinding,
+    //                                   int layer, MapAtom MapAtom);
+    //it will just give back the given atom
+    class GenericBinding : public IBinding
+    {
+    public:
+	GenericBinding(bool walkable, std::string spriteName, Manager* manager);
+	~GenericBinding();
+	//each time it creates a new MapAtom
+	MapAtom* bindingAction();
 
-		private:
-			bool walkable;
-			std::string spriteName;
-			Manager* manager;
-	};
+    private:
+	bool walkable;
+	std::string spriteName;
+	Manager* manager;
+    };
 
-	class AnimBinding : public IBinding
-	{
-		public:
-	              //fpd == frames per directions 
-	               AnimBinding(bool walkable, std::string spriteName, Manager* manager, int fpd, int delay);
-			~AnimBinding();
-			//each time it creates a new MapAtom
-			MapAtom* bindingAction();
+    class AnimBinding : public IBinding
+    {
+    public:
+	//fpd == frames per directions 
+	AnimBinding(bool walkable, std::string spriteName,
+		    Manager* manager, int fpd, int delay);
+	~AnimBinding();
+	//each time it creates a new MapAtom
+	MapAtom* bindingAction();
 
-		private:
-			bool walkable;
-			std::string spriteName;
-			Manager* manager;
-	                int fpd; 
-	                int delay;
-	};
+    private:
+	bool walkable;
+	std::string spriteName;
+	Manager* manager;
+	int fpd; 
+	int delay;
+    };
 
-	//A MapAtom is the tiniest part of a map
-	class MapAtom 
-	{
-		public:
-			MapAtom(bool walkable, Sprite* sprite);
-			~MapAtom();
-			Sprite* getSprite();
-			bool isWalkable();
+    //A MapAtom is the tiniest part of a map
+    class MapAtom 
+    {
+    public:
+	MapAtom(bool walkable, Sprite* sprite);
+	~MapAtom();
+	Sprite* getSprite();
+	bool isWalkable();
 
-		private:
-			//false by default but being explicit doesn't kill
-			bool walkable = false;
-			Sprite* sprite;
-	};
+    private:
+	//false by default but being explicit doesn't kill
+	bool walkable = false;
+	Sprite* sprite;
+    };
 
-	class Map : public GameComponent
-	{
-		public:
-			Map(std::string mapName, std::vector<MapAtom***> atomsByLayers, int xmax, int ymax);
-			~Map();
+    class Map : public GameComponent
+    {
+    public:
+	Map(std::string mapName, std::vector<MapAtom***> atomsByLayers,
+	    int xmax, int ymax);
+	~Map();
 
-			void init();
-			void update();
-			void draw();
+	void init();
+	void update();
+	void draw();
 
-			void setOffsets(int x, int y);
+	void setOffsets(int x, int y);
 
-			MapAtom* getMapAtom(int x, int y, int layer);
-			std::vector<MapAtom***> getAtoms();
+	MapAtom* getMapAtom(int x, int y, int layer);
+	std::vector<MapAtom***> getAtoms();
 
-		private:
-			void updateOffsets();
-			std::vector<MapAtom***> atomsByLayers;
-			std::string mapName;	
-			int xmax, ymax;
-			int x_offset = 0;
-			int y_offset = 0;
+    private:
+	void updateOffsets();
+	std::vector<MapAtom***> atomsByLayers;
+	std::string mapName;	
+	int xmax, ymax;
+	int x_offset = 0;
+	int y_offset = 0;
 
-			int start_x, start_y;
-	};
+	int start_x, start_y;
+    };
 }
 
 #endif
