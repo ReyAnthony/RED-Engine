@@ -1,4 +1,3 @@
-
 /*
   engine_core.cpp is part of RED-ENGINE - An Object-Oriented game
   engine based on Allegro5 Copyright (C) 2015 - 2016 Anthony REY
@@ -360,88 +359,6 @@ namespace RedEngine
     void Manager::resetTransformTranslate()
     {
 	transformTranslate(0,0);
-    }
-
-    //############## GameScene class ############## 
-    GameScene::~GameScene()
-    {}
-
-    Manager* GameScene::getManager()
-    {
-	return this->manager;
-    }
-
-    void GameScene::setManager(Manager* manager)
-    {
-	this->manager = manager;
-    }
-
-    void GameScene::addComponent(GameComponent* component)
-    {
-	//TODO guards
-	component->setManager(this->getManager());
-	component->init();
-	components.push_back(component);
-    }
-
-    void GameScene::drawComponentsBack()
-    {
-	std::list<RedEngine::GameComponent*>::const_iterator iterator;
-	for (iterator = components.begin();
-	     iterator != components.end(); ++iterator) {
-
-	    if( (*iterator)->getIsBack()) 
-		(*iterator)->draw();
-	}
-    }	
-	
-    void GameScene::drawComponentsFront()
-    {
-	std::list<RedEngine::GameComponent*>::const_iterator iterator;
-	for (iterator = components.begin();
-	     iterator != components.end(); ++iterator) {
-			
-	    if( ! (*iterator)->getIsBack()) 
-		(*iterator)->draw();
-	}
-
-    }
-
-    void GameScene::updateComponents()
-    {
-	std::list<RedEngine::GameComponent*>::const_iterator iterator;
-	for (iterator = components.begin();
-	     iterator != components.end(); ++iterator) {
-
-	    (*iterator)->update();
-	}
-    }
-
-    //####### GameComponent ########
-
-    GameComponent::GameComponent(bool isBack)
-    {
-	this->isBack = isBack;
-    } 
-
-    GameComponent::~GameComponent()
-    {
-
-    }
-
-    bool GameComponent::getIsBack()
-    {
-	return isBack;
-    }
-
-    void GameComponent::setManager(Manager* manager)
-    {
-	this->manager = manager;
-    }
-
-    Manager* GameComponent::getManager()
-    {
-	return manager;
     }
 
     KeyboardEngine *Manager::getKeyBoardEngine() {

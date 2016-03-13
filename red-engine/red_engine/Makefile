@@ -47,7 +47,7 @@ $(OUTPUT) : red_engine.a
 #TODO tests
 
 # ENGINE
-red_engine.a: engine_core.o keyboard_engine.o map.o collision_engine.o transitions.o sound_engine.o sprite.o datapool.o copy_hpp
+red_engine.a: engine_core.o keyboard_engine.o map.o collision_engine.o transitions.o sound_engine.o sprite.o datapool.o game_components.o game_scene.o copy_hpp
 	ar rvs $(LIB_PATH)lib/red_engine.a \
 	engine_core.o \
 	keyboard_engine.o \
@@ -56,7 +56,9 @@ red_engine.a: engine_core.o keyboard_engine.o map.o collision_engine.o transitio
 	transitions.o \
 	sound_engine.o \
 	sprite.o \
-	datapool.o
+	datapool.o \
+	game_components.o \
+	game_scene.o
 	ranlib $(LIB_PATH)lib/red_engine.a
 
 copy_hpp:
@@ -69,39 +71,12 @@ copy_hpp:
 	cp $(engine)sound_engine.hpp $(LIB_PATH)include/red_engine/sound_engine.hpp
 	cp $(engine)sprite.hpp $(LIB_PATH)include/red_engine/sprite.hpp
 	cp $(engine)datapool.hpp $(LIB_PATH)include/red_engine/datapool.hpp
+	cp $(engine)game_components.hpp $(LIB_PATH)include/red_engine/game_components.hpp
+	cp $(engine)game_scene.hpp $(LIB_PATH)include/red_engine/game_scene.hpp		
 
-#must use implicit rules to reduce
-engine_core.o:$(engine)engine_core.cpp
+$(engine).cpp.o:
 	$(ASPECTCC) $(CCFLAGS) -c \
-	$(engine)engine_core.cpp
-
-keyboard_engine.o:$(engine)keyboard_engine.cpp
-	$(ASPECTCC) $(CCFLAGS) -c \
-	$(engine)keyboard_engine.cpp
-
-map.o:$(engine)map.cpp
-	$(ASPECTCC) $(CCFLAGS) -c \
-	$(engine)map.cpp
-
-collision_engine.o:$(engine)collision_engine.cpp
-	$(ASPECTCC) $(CCFLAGS) -c \
-	$(engine)collision_engine.cpp
-
-transitions.o:$(engine)transitions.cpp
-	$(ASPECTCC) $(CCFLAGS) -c \
-	$(engine)transitions.cpp
-
-sound_engine.o:$(engine)sound_engine.cpp
-	$(ASPECTCC) $(CCFLAGS) -c \
-	$(engine)sound_engine.cpp
-
-sprite.o:$(engine)sprite.cpp
-	$(ASPECTCC) $(CCFLAGS) -c \
-	$(engine)sprite.cpp
-
-datapool.o:$(engine)datapool.cpp
-	$(ASPECTCC) $(CCFLAGS) -c \
-	$(engine)datapool.cpp
+	$(engine)$<
 
 #CLEAN
 clean:clean-engine

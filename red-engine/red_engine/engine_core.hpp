@@ -1,4 +1,3 @@
-
 /*
   engine_core.hpp is part of RED-ENGINE - An Object-Oriented game
   engine based on Allegro5 Copyright (C) 2015 - 2016 Anthony REY
@@ -33,12 +32,13 @@
 #include <stack>
 #include <unordered_map>
 #include <string>
-#include <list>
 
 #include "sprite.hpp"
 #include "keyboard_engine.hpp"
 #include "sound_engine.hpp"
 #include "datapool.hpp"
+#include "game_scene.hpp"
+#include "game_components.hpp"
 
 namespace RedEngine {
 
@@ -57,18 +57,12 @@ namespace RedEngine {
 	TEST_EXIT // 11
     };
 
-// forward declarations
-    class DataPool;
-    class Manager;
-    class GameScene;
-    class ScrollScene;
-    class GameComponent;
-    class Console;
-    class Sprite;
-    class SoundEngine;
 
-//##############  Manager class ##############
-// This class manage the game
+    class SoundEngine;
+    class Sprite;
+    
+    //##############  Manager class ##############
+    // This class manage the game
     class Manager {
     public:
 	Manager(int virtual_width, int virtual_height, int real_width,
@@ -87,7 +81,6 @@ namespace RedEngine {
 	ALLEGRO_SAMPLE *getSound(std::string key);
 	ALLEGRO_FONT *getFont(std::string key);
 
-	// Mutators
 	// const char* cause allegro is C not C++
 	void addSprite(std::string key, const char *file);
 	void addSound(std::string key, const char *file);
@@ -129,12 +122,10 @@ namespace RedEngine {
 	// scene at the top of the stack is played
 	std::stack<GameScene *> game_scenes;
 
-	// Other game related
 	DataPool *datapool; // when forward declaring you can only use a pointer
 	KeyboardEngine keyboard_engine;
 	SoundEngine *soundEngine;
 	
-	// variables
 	int virtual_width;
 	int virtual_height;
 	int real_width;
@@ -145,7 +136,6 @@ namespace RedEngine {
 	bool isFullscreen;
 	bool isResizable;
 
-	// allegro
 	ALLEGRO_DISPLAY *display;
 	ALLEGRO_EVENT ev;
 	ALLEGRO_EVENT_QUEUE *event_queue;
@@ -153,63 +143,11 @@ namespace RedEngine {
 
 	// for moving the screen with transforms
 	ALLEGRO_TRANSFORM camera_transform;
-
-	// bkg color
 	ALLEGRO_COLOR bkg_color;
 
-	// constants
 	static const int FPS = 60;
     };
 
-//##############  GameScene class ##############
-// TODO rendering pipeline ?
-    class GameScene {
-    public:
-	virtual ~GameScene() = 0;
-	// init is called after set manager when pushing scene
-	void virtual init() = 0;
-	void virtual update() = 0;
-	void virtual draw() = 0;
 
-	// This setup is done auto by the manager when pushing the scene
-	Manager *getManager();
-	void addComponent(GameComponent *component);
-
-	friend class Manager;
-	void setManager(Manager *manager);
-
-    private:
-	// auto draw for components;
-	void drawComponentsBack();
-	void drawComponentsFront();
-	void updateComponents();
-
-	Manager *manager;
-	std::list<GameComponent *> components;
-    };
-
-    class GameComponent {
-    public:
-	GameComponent(bool back);
-	//FIXME using virtual makes the program crash
-	/*virtual*/  ~GameComponent();
-	bool getIsBack();
-
-	virtual void init() = 0;
-	virtual void update() = 0;
-	virtual void draw() = 0;
-
-	friend class Manager;
-	// when pushing into the manager, the GameScene will pass it into the method
-	void setManager(Manager *manager);
-
-    protected:
-	Manager *getManager();
-
-    private:
-	// should it be drawn at the back ?
-	bool isBack;
-	Manager *manager;
-    };
 }
 #endif
