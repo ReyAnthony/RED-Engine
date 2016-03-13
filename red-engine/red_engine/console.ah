@@ -1,3 +1,4 @@
+
 #ifndef CONSOLE_ASPECT_AH
 #define CONSOLE_ASPECT_AH
 
@@ -20,16 +21,16 @@ aspect Console
     // an empty string for editting
     std::string::iterator iter = edittext.begin(); // string iterator
 
-    Console()
+    advice execution ("% RedEngine::Manager::init(...)")
+       	&& that(manager) : after (Manager* manager) 
     {
-	//TODO unhardcode
-	this->consoleHeight = 25;
-	this->consoleWidth = 720;
-		
+	this->consoleHeight = 25;		
 	this->posy = 0;
 	this->slidespeed = 5;
+	
+	this->consoleWidth = manager->getWidth();
     }
-
+	
     advice execution ("% RedEngine::Manager::update(...)")
 	&& that(manager) : after (Manager* manager) 
     {
@@ -150,8 +151,5 @@ aspect Console
         //replace it where it should
 	iter = edittext.end();
     }
-    
-	
 };
-
 #endif
