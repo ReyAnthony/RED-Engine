@@ -1,3 +1,7 @@
+#Some code found lying somewhere on my hard drive .. Some patterns might be a bit useful to study like MapFactory .. Otherwize it's pretty much shit :) 
+
+Old description (For reference ! )
+
 # RED-Engine
 C++ Game Engine based on Allegro5 and java map editor.
 
